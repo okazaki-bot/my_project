@@ -1,0 +1,26 @@
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+
+# Environment / secrets
+.env
+.env.*
+
+# Local Claude settings (machine-specific, may contain secrets)
+.claude/settings.local.json
+
+# OS
+.DS_Store
+Thumbs.db
