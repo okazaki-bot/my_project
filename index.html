@@ -13,50 +13,65 @@
             min-height: 100vh;
         }
 
+        /* ── Header ── */
         header {
             background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
             color: white;
-            padding: 20px 20px 16px;
+            padding: 16px 16px 14px;
         }
-        header h1 { font-size: 1.25rem; font-weight: 800; letter-spacing: 0.04em; }
-        header .subtitle { font-size: 0.78rem; color: #9ab; margin-top: 4px; }
+        .header-inner { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+        header h1 { font-size: 1.15rem; font-weight: 800; letter-spacing: 0.04em; }
+        header .subtitle { font-size: 0.75rem; color: #9ab; margin-top: 3px; }
+        .edit-toggle {
+            flex-shrink: 0;
+            background: rgba(255,255,255,0.15);
+            color: white; border: 1px solid rgba(255,255,255,0.3);
+            padding: 7px 14px; border-radius: 20px;
+            font-size: 0.8rem; font-weight: 700; cursor: pointer;
+            white-space: nowrap; transition: background 0.2s;
+        }
+        .edit-toggle:hover { background: rgba(255,255,255,0.25); }
+        .edit-toggle.active { background: #f59e0b; border-color: #f59e0b; color: #1a1a1a; }
 
+        /* ── Edit banner ── */
+        .edit-banner {
+            background: #fef3c7; border-bottom: 2px solid #f59e0b;
+            padding: 10px 16px;
+            display: flex; align-items: center; justify-content: space-between; gap: 10px;
+        }
+        .edit-banner-text { font-size: 0.82rem; font-weight: 700; color: #92400e; }
+        .btn-reset {
+            font-size: 0.75rem; font-weight: 700;
+            background: white; color: #92400e;
+            border: 1px solid #f59e0b; border-radius: 16px;
+            padding: 5px 12px; cursor: pointer; white-space: nowrap;
+        }
+        .btn-reset:hover { background: #fef9ee; }
+
+        /* ── Day tabs ── */
         .day-tabs {
-            display: flex;
-            overflow-x: auto;
-            background: #162030;
-            padding: 0 8px;
-            scrollbar-width: none;
-            border-bottom: 1px solid #0a1520;
+            display: flex; overflow-x: auto;
+            background: #162030; padding: 0 8px;
+            scrollbar-width: none; border-bottom: 1px solid #0a1520;
         }
         .day-tabs::-webkit-scrollbar { display: none; }
-
         .day-tab {
-            flex-shrink: 0;
-            padding: 10px 14px;
-            color: #6a8a9a;
-            cursor: pointer;
-            font-size: 0.75rem;
-            border-bottom: 3px solid transparent;
-            text-align: center;
-            transition: all 0.2s;
+            flex-shrink: 0; padding: 10px 14px;
+            color: #6a8a9a; cursor: pointer;
+            font-size: 0.75rem; border-bottom: 3px solid transparent;
+            text-align: center; transition: all 0.2s;
         }
         .day-tab .dn { font-size: 0.9rem; font-weight: 800; display: block; }
         .day-tab .dd { font-size: 0.68rem; margin-top: 1px; }
         .day-tab:hover { color: #acd; }
         .day-tab.active { color: #fff; border-bottom-color: #4eb8ff; }
 
-        .main {
-            max-width: 680px;
-            margin: 0 auto;
-            padding: 18px 14px 40px;
-        }
+        /* ── Main ── */
+        .main { max-width: 680px; margin: 0 auto; padding: 18px 14px 40px; }
 
         .day-header {
-            background: white;
-            border-radius: 14px;
-            padding: 16px 18px;
-            margin-bottom: 18px;
+            background: white; border-radius: 14px;
+            padding: 16px 18px; margin-bottom: 18px;
             box-shadow: 0 1px 6px rgba(0,0,0,0.07);
         }
         .day-header h2 { font-size: 1.05rem; font-weight: 800; line-height: 1.4; }
@@ -69,64 +84,39 @@
         .badge-area { background: #e8f4ff; color: #1a6fa8; }
         .badge-hotel { background: #fff4e0; color: #a0600a; }
 
+        /* ── Timeline ── */
         .timeline { position: relative; }
         .timeline::before {
-            content: '';
-            position: absolute;
-            left: 48px;
-            top: 0; bottom: 0;
+            content: ''; position: absolute;
+            left: 48px; top: 0; bottom: 0;
             width: 2px;
             background: linear-gradient(to bottom, #d0e8f8, #e8e8e8);
         }
-
-        .event-card {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 12px;
-            position: relative;
-        }
+        .event-card { display: flex; gap: 10px; margin-bottom: 12px; position: relative; }
         .event-time {
-            width: 48px;
-            text-align: right;
-            font-size: 0.72rem;
-            font-weight: 700;
-            color: #778;
-            padding-top: 13px;
-            flex-shrink: 0;
-            line-height: 1.3;
+            width: 48px; text-align: right;
+            font-size: 0.72rem; font-weight: 700; color: #778;
+            padding-top: 13px; flex-shrink: 0; line-height: 1.3;
         }
         .event-dot {
-            width: 14px; height: 14px;
-            border-radius: 50%;
-            background: #4eb8ff;
-            border: 3px solid #fff;
+            width: 14px; height: 14px; border-radius: 50%;
+            background: #4eb8ff; border: 3px solid #fff;
             box-shadow: 0 0 0 2px #4eb8ff;
-            flex-shrink: 0;
-            margin-top: 13px;
-            z-index: 1;
+            flex-shrink: 0; margin-top: 13px; z-index: 1;
         }
         .event-dot.dot-special { background: #ff5f3a; box-shadow: 0 0 0 2px #ff5f3a; }
         .event-dot.dot-meal    { background: #3cb371; box-shadow: 0 0 0 2px #3cb371; }
         .event-dot.dot-move    { background: #aaa;    box-shadow: 0 0 0 2px #aaa; }
-
         .event-body {
-            flex: 1;
-            background: white;
-            border-radius: 12px;
+            flex: 1; background: white; border-radius: 12px;
             padding: 12px 14px;
             box-shadow: 0 1px 4px rgba(0,0,0,0.07);
-            transition: box-shadow 0.15s, transform 0.15s;
-            min-width: 0;
+            transition: box-shadow 0.15s, transform 0.15s; min-width: 0;
         }
         .event-body.clickable { cursor: pointer; }
-        .event-body.clickable:hover {
-            box-shadow: 0 4px 14px rgba(0,0,0,0.13);
-            transform: translateY(-1px);
-        }
+        .event-body.clickable:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.13); transform: translateY(-1px); }
 
-        .ev-head {
-            display: flex; align-items: flex-start; gap: 7px; flex-wrap: wrap;
-        }
+        .ev-head { display: flex; align-items: flex-start; gap: 7px; flex-wrap: wrap; }
         .ev-icon { font-size: 1.15rem; flex-shrink: 0; }
         .ev-title { font-weight: 700; font-size: 0.92rem; flex: 1; min-width: 0; }
         .ev-tag {
@@ -140,21 +130,45 @@
         .t-move  { background: #f2f2f2; color: #555; }
         .t-free  { background: #f5eeff; color: #6a30a0; }
         .t-hotel { background: #fff8ea; color: #a06010; }
+        .ev-desc { font-size: 0.8rem; color: #555; margin-top: 6px; line-height: 1.55; }
+        .ev-loc  { font-size: 0.72rem; color: #3a8fd4; margin-top: 6px; display: flex; align-items: center; gap: 3px; }
+        .ev-hint { font-size: 0.7rem; color: #aaa; margin-top: 5px; display: flex; align-items: center; gap: 3px; }
 
-        .ev-desc {
-            font-size: 0.8rem; color: #555;
-            margin-top: 6px; line-height: 1.55;
+        /* ── Edit strip ── */
+        .edit-strip {
+            display: none;
+            align-items: center; gap: 6px;
+            margin-top: 10px; padding-top: 10px;
+            border-top: 1px dashed #e0e0e0;
         }
-        .ev-loc {
-            font-size: 0.72rem; color: #3a8fd4;
-            margin-top: 6px; display: flex; align-items: center; gap: 3px;
+        .edit-mode .edit-strip { display: flex; }
+        .edit-strip .move-btns { display: flex; gap: 3px; margin-right: auto; }
+        .strip-btn {
+            display: flex; align-items: center; gap: 4px;
+            font-size: 0.75rem; font-weight: 700;
+            padding: 5px 10px; border-radius: 8px;
+            border: none; cursor: pointer; transition: opacity 0.15s;
         }
-        .ev-hint {
-            font-size: 0.7rem; color: #aaa;
-            margin-top: 5px; display: flex; align-items: center; gap: 3px;
-        }
+        .strip-btn:hover { opacity: 0.8; }
+        .strip-btn:disabled { opacity: 0.3; cursor: default; }
+        .btn-up   { background: #f0f0f0; color: #444; }
+        .btn-down { background: #f0f0f0; color: #444; }
+        .btn-edit-ev { background: #e8f4ff; color: #1a6fa8; }
+        .btn-del  { background: #fff0f0; color: #c0392b; }
 
-        /* Modal */
+        /* ── Add event button ── */
+        .btn-add-event {
+            display: none;
+            width: 100%; margin-top: 6px; padding: 13px;
+            background: white; color: #1a6fa8;
+            border: 2px dashed #b0d4f0; border-radius: 12px;
+            font-size: 0.9rem; font-weight: 700; cursor: pointer;
+            transition: background 0.15s;
+        }
+        .btn-add-event:hover { background: #f0f8ff; }
+        .edit-mode .btn-add-event { display: block; }
+
+        /* ── Detail modal ── */
         .overlay {
             display: none; position: fixed; inset: 0;
             background: rgba(0,0,0,0.55); z-index: 1000;
@@ -163,554 +177,573 @@
         }
         .overlay.open { display: flex; }
         @media (min-width: 580px) { .overlay.open { align-items: center; } }
-
         .modal {
             background: white; width: 100%; max-width: 520px;
             border-radius: 22px 22px 0 0;
-            padding: 24px 20px 32px;
-            max-height: 88vh; overflow-y: auto;
+            padding: 24px 20px 32px; max-height: 88vh; overflow-y: auto;
             animation: slideUp 0.22s ease;
         }
         @media (min-width: 580px) { .modal { border-radius: 20px; } }
 
+        /* ── Edit form modal ── */
+        .form-overlay {
+            display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,0.6); z-index: 1100;
+            backdrop-filter: blur(3px);
+            align-items: flex-end; justify-content: center;
+        }
+        .form-overlay.open { display: flex; }
+        @media (min-width: 580px) { .form-overlay.open { align-items: center; } }
+        .form-modal {
+            background: white; width: 100%; max-width: 540px;
+            border-radius: 22px 22px 0 0;
+            padding: 20px 18px 36px; max-height: 92vh; overflow-y: auto;
+            animation: slideUp 0.22s ease;
+        }
+        @media (min-width: 580px) { .form-modal { border-radius: 20px; } }
+
         @keyframes slideUp {
             from { transform: translateY(24px); opacity: 0; }
-            to   { transform: translateY(0);    opacity: 1; }
+            to   { transform: translateY(0); opacity: 1; }
         }
 
-        .modal-handle {
-            width: 36px; height: 4px; background: #ddd;
-            border-radius: 2px; margin: 0 auto 18px;
-        }
-        .modal-head {
-            display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px;
-        }
-        .modal-icon-wrap {
-            font-size: 2rem; line-height: 1;
-            background: #f5f5f5; border-radius: 12px;
-            padding: 8px; flex-shrink: 0;
-        }
+        /* ── Shared modal parts ── */
+        .modal-handle { width: 36px; height: 4px; background: #ddd; border-radius: 2px; margin: 0 auto 18px; }
+        .modal-head { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px; }
+        .modal-icon-wrap { font-size: 2rem; line-height: 1; background: #f5f5f5; border-radius: 12px; padding: 8px; flex-shrink: 0; }
         .modal-title { font-size: 1.1rem; font-weight: 800; line-height: 1.3; }
         .modal-time-tag { display: flex; align-items: center; gap: 6px; margin-top: 5px; }
         .modal-time-text { font-size: 0.78rem; color: #777; }
-        .modal-close {
-            margin-left: auto; background: #f0f0f0;
-            border: none; font-size: 1rem; cursor: pointer;
-            color: #666; padding: 6px 10px; border-radius: 20px;
-            font-weight: 700; flex-shrink: 0;
-        }
-
+        .modal-close { margin-left: auto; background: #f0f0f0; border: none; font-size: 1rem; cursor: pointer; color: #666; padding: 6px 10px; border-radius: 20px; font-weight: 700; flex-shrink: 0; }
         .m-divider { height: 1px; background: #eee; margin: 14px 0; }
-
         .m-section { margin-bottom: 14px; }
-        .m-section h3 {
-            font-size: 0.7rem; font-weight: 800; color: #999;
-            text-transform: uppercase; letter-spacing: 0.08em;
-            margin-bottom: 6px;
-        }
-        .m-section p {
-            font-size: 0.87rem; line-height: 1.65; color: #333;
-        }
-        .arch-pills {
-            display: flex; flex-wrap: wrap; gap: 6px;
-        }
-        .arch-pill {
-            background: #f0f6ff; border: 1px solid #cce; color: #336;
-            font-size: 0.72rem; padding: 3px 10px; border-radius: 20px;
-        }
+        .m-section h3 { font-size: 0.7rem; font-weight: 800; color: #999; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+        .m-section p { font-size: 0.87rem; line-height: 1.65; color: #333; }
+        .arch-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+        .arch-pill { background: #f0f6ff; border: 1px solid #cce; color: #336; font-size: 0.72rem; padding: 3px 10px; border-radius: 20px; }
+        .map-frame { width: 100%; height: 220px; border: none; border-radius: 14px; margin-top: 18px; display: block; }
 
-        .map-frame {
-            width: 100%; height: 220px;
-            border: none; border-radius: 14px;
-            margin-top: 18px;
-            display: block;
+        /* ── Form fields ── */
+        .form-title { font-size: 1rem; font-weight: 800; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; }
+        .form-group { margin-bottom: 14px; }
+        .form-row { display: flex; gap: 10px; }
+        .form-row .form-group { flex: 1; }
+        .form-label { display: block; font-size: 0.72rem; font-weight: 700; color: #666; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.05em; }
+        .form-req { color: #e55; }
+        .form-input, .form-select, .form-textarea {
+            width: 100%; padding: 9px 12px;
+            border: 1.5px solid #e0e0e0; border-radius: 9px;
+            font-size: 0.88rem; font-family: inherit; color: #1a1a1a; background: white;
+            transition: border-color 0.15s; appearance: none;
         }
+        .form-input:focus, .form-select:focus, .form-textarea:focus { outline: none; border-color: #4eb8ff; }
+        .form-textarea { resize: vertical; min-height: 72px; }
+        .form-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
+        .arch-fields { background: #f8f8ff; border: 1px solid #dde; border-radius: 10px; padding: 12px; margin-top: 4px; }
+        .arch-fields .form-group:last-child { margin-bottom: 0; }
+        .checkbox-row { display: flex; align-items: center; gap: 8px; }
+        .checkbox-row input[type=checkbox] { width: 18px; height: 18px; accent-color: #4eb8ff; cursor: pointer; }
+        .checkbox-row label { font-size: 0.85rem; cursor: pointer; }
+        .form-actions { display: flex; gap: 10px; margin-top: 20px; }
+        .btn-save { flex: 1; padding: 13px; background: linear-gradient(135deg, #1a7ad4, #0d5fa0); color: white; border: none; border-radius: 12px; font-size: 0.9rem; font-weight: 800; cursor: pointer; transition: opacity 0.2s; }
+        .btn-save:hover { opacity: 0.88; }
+        .btn-cancel-form { padding: 13px 20px; background: #f0f0f0; color: #555; border: none; border-radius: 12px; font-size: 0.9rem; font-weight: 700; cursor: pointer; }
+        .icon-picker { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+        .icon-opt { font-size: 1.3rem; padding: 4px 6px; border-radius: 8px; cursor: pointer; border: 2px solid transparent; transition: border-color 0.15s; }
+        .icon-opt:hover, .icon-opt.selected { border-color: #4eb8ff; background: #e8f4ff; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>🏛 ロサンゼルス 建築視察ツアー 2026</h1>
-    <div class="subtitle">2026年6月3日（水）〜 6月10日（水）｜7泊8日｜工務店経営者研修</div>
+    <div class="header-inner">
+        <div>
+            <h1>🏛 ロサンゼルス 建築視察ツアー 2026</h1>
+            <div class="subtitle">2026年6月3日（水）〜 6月10日（水）｜7泊8日｜工務店経営者研修</div>
+        </div>
+        <button class="edit-toggle" id="editToggle" onclick="toggleEditMode()">✏️ 編集</button>
+    </div>
 </header>
+
+<div class="edit-banner" id="editBanner" style="display:none">
+    <span class="edit-banner-text">✏️ 編集モード — イベントの追加・変更・削除・並べ替えができます</span>
+    <button class="btn-reset" onclick="confirmReset()">🔄 初期化</button>
+</div>
 
 <div class="day-tabs" id="dayTabs"></div>
 
-<div class="main">
+<div class="main" id="mainArea">
     <div class="day-header" id="dayHeader"></div>
     <div class="timeline" id="timeline"></div>
+    <button class="btn-add-event" id="addEventBtn" onclick="openAddForm()">＋ イベントを追加</button>
 </div>
 
+<!-- Detail modal -->
 <div class="overlay" id="overlay">
-    <div class="modal" id="modal">
-        <div class="modal-handle"></div>
-    </div>
+    <div class="modal" id="modal"></div>
+</div>
+
+<!-- Edit form modal -->
+<div class="form-overlay" id="formOverlay">
+    <div class="form-modal" id="formModal"></div>
 </div>
 
 <script>
-const TAG = {
-    arch:  { cls: 't-arch',  dot: '',           label: '建築視察' },
-    spec:  { cls: 't-spec',  dot: 'dot-special', label: 'スペシャル' },
-    meal:  { cls: 't-meal',  dot: 'dot-meal',    label: '食事' },
-    move:  { cls: 't-move',  dot: 'dot-move',    label: '移動' },
-    free:  { cls: 't-free',  dot: '',            label: 'フリー' },
-    hotel: { cls: 't-hotel', dot: '',            label: 'ホテル' },
-};
-
-const DAYS = [
-    {
-        day: 1, date: '6/3', label: 'Day 1',
-        fullDate: '2026年6月3日（水）',
-        title: '到着・ビバリーヒルズ散策',
-        area: 'Beverly Hills',
-        hotel: 'ザ モザイク ホテル（BH）',
-        events: [
-            {
-                time: '前日出発', icon: '✈️', tag: 'move',
-                title: '成田空港 出発',
-                desc: 'JL062便にて成田を出発。約10時間のフライトでLAXへ向かいます（国際日付変更線を通過し、現地は同日早朝に到着）。',
-                loc: '成田国際空港', addr: '成田国際空港, 千葉県成田市', hasMap: true,
-            },
-            {
-                time: '08:25', icon: '🛬', tag: 'move',
-                title: 'LAX 到着・入国',
-                desc: 'ロサンゼルス国際空港（LAX）到着。入国審査、レンタカー手続き（2台）を行います。',
-                loc: 'Los Angeles International Airport', addr: 'Los Angeles International Airport, Los Angeles, CA', hasMap: true,
-            },
-            {
-                time: '11:00', icon: '🏨', tag: 'hotel',
-                title: 'ホテル チェックイン',
-                desc: 'ザ モザイク ホテル（ビバリーヒルズ）にチェックイン。荷物を預けて時差調整の休憩を取ります。',
-                loc: 'ザ モザイク ホテル', addr: '125 Spalding Dr, Beverly Hills, CA 90212', hasMap: true,
-            },
-            {
-                time: '13:00', icon: '🍽', tag: 'meal',
-                title: '昼食',
-                desc: 'ホテル周辺のカフェで昼食。ビバリーヒルズの雰囲気を感じながら時差調整を。',
-                loc: 'ビバリーヒルズ周辺', addr: 'Beverly Hills, CA 90210', hasMap: true,
-            },
-            {
-                time: '15:00', icon: '🛍', tag: 'arch',
-                title: 'ロデオドライブ 散策',
-                desc: '世界有数の高級ブティック街。各ブランドが競うように独自の建築デザインを採用した商業建築のショーケース。ファサードデザインや素材感を視察。',
-                loc: 'Rodeo Drive', addr: 'Rodeo Dr, Beverly Hills, CA 90210', hasMap: true,
-                detail: '【視察ポイント】\n・各ブランド旗艦店のファサードデザインと差別化戦略\n・路面店建築における採光・開口部の工夫\n・街並みと個性の両立（高さ制限・素材ルール）',
-            },
-            {
-                time: '18:00', icon: '🍽', tag: 'meal',
-                title: 'ディナー',
-                desc: 'ビバリーヒルズエリアにてディナー。',
-                loc: 'ビバリーヒルズ', addr: 'Beverly Hills, CA 90210', hasMap: true,
-            },
-        ]
-    },
-    {
-        day: 2, date: '6/4', label: 'Day 2',
-        fullDate: '2026年6月4日（木）',
-        title: 'ユニバーサルスタジオ・ハリウッド（終日）',
-        area: 'Universal City',
-        hotel: 'ザ モザイク ホテル（BH）',
-        events: [
-            {
-                time: '09:00', icon: '🚗', tag: 'move',
-                title: 'ホテル 出発',
-                desc: 'ホテルを出発してユニバーサルスタジオへ向かいます（約30分）。',
-                loc: 'ザ モザイク ホテル', addr: '125 Spalding Dr, Beverly Hills, CA 90212', hasMap: false,
-            },
-            {
-                time: '10:00', icon: '🎢', tag: 'spec',
-                title: 'ユニバーサルスタジオ・ハリウッド 到着',
-                desc: '映画スタジオとテーマパークが融合した世界最大級のエンターテインメント施設。スタジオツアーでは実際の映画セットを間近に体験。',
-                loc: 'Universal Studios Hollywood', addr: '100 Universal City Plaza, Universal City, CA 91608', hasMap: true,
-                detail: '【体験ポイント】\n・スタジオツアーで映画セットの空間演出を体感\n・大規模施設の動線設計・サインデザイン\n・テーマパーク建築の没入感演出技法\n\nエンターテインメント建築が来訪者を引き込む仕掛けに着目してみましょう。',
-            },
-            {
-                time: '10:30', icon: '🎬', tag: 'free',
-                title: '終日 パーク内自由行動',
-                desc: 'スタジオツアー、各種アトラクションを自由に体験。ウィザーディング・ワールド・オブ・ハリー・ポッターなど話題エリアも注目。',
-                loc: 'Universal Studios Hollywood', addr: '', hasMap: false,
-            },
-            {
-                time: '18:00', icon: '🚗', tag: 'move',
-                title: 'パーク 出発',
-                desc: 'パークを出発。ホテルへ向かいます（約45分）。',
-                loc: '', addr: '', hasMap: false,
-            },
-            {
-                time: '19:00', icon: '🏨', tag: 'hotel',
-                title: 'ホテル 帰着',
-                desc: 'ザ モザイク ホテルへ帰着。明日の建築視察に備えて休息。',
-                loc: 'ザ モザイク ホテル', addr: '125 Spalding Dr, Beverly Hills, CA 90212', hasMap: false,
-            },
-        ]
-    },
-    {
-        day: 3, date: '6/5', label: 'Day 3',
-        fullDate: '2026年6月5日（金）',
-        title: 'シンドラー・ハウス ＋ イームズ・ハウス',
-        area: 'West Hollywood / Pacific Palisades',
-        hotel: 'ザ モザイク ホテル（BH）',
-        events: [
-            {
-                time: '11:00', icon: '🏠', tag: 'arch',
-                title: 'シンドラー・ハウス（MAK Center）',
-                desc: '1921-22年。R.M.シンドラー設計。傾斜型枠コンクリート壁と可動パネル・木製フレームの融合。協同生活を想定した実験的住宅。カリフォルニア・モダニズムの原点。',
-                loc: 'MAK Center / Schindler House', addr: '835 N Kings Rd, West Hollywood, CA 90069', hasMap: true,
-                architect: 'R.M. シンドラー', year: '1921-22年', style: 'カリフォルニア・モダニズム',
-                detail: '【視察ポイント】\n① 傾斜型枠コンクリート壁の表情と質感\n② 可動パネルによる屋内・屋外境界の曖昧化\n③ 協同生活のための独創的な空間構成\n\n【実務への応用】\n可動間仕切りの活用でLDKを多目的可変空間に。中庭型プランで都市部狭小地でもプライバシーと採光を両立。',
-            },
-            {
-                time: '13:00', icon: '🍽', tag: 'meal',
-                title: '昼食（メルローズ・アベニュー）',
-                desc: 'トレンディなメルローズ通り沿いのレストランで昼食。アートギャラリーやブティックが立ち並ぶLAのカルチャースポット。',
-                loc: 'Melrose Avenue', addr: 'Melrose Ave, West Hollywood, CA 90046', hasMap: true,
-            },
-            {
-                time: '14:30', icon: '🏠', tag: 'arch',
-                title: 'イームズ・ハウス（Case Study House #8）',
-                desc: '1949年。チャールズ＆レイ・イームズ設計。カタログ注文可能な規格部材を用いた実験住宅。モンドリアン風カラフルパネルと軽快な鉄骨フレームが特徴。産業と自然の共生を体現。',
-                loc: 'Eames House', addr: '203 Chautauqua Blvd, Pacific Palisades, CA 90272', hasMap: true,
-                architect: 'チャールズ＆レイ・イームズ', year: '1949年', style: 'ケーススタディ・ハウス（プレファブ工法）',
-                detail: '【視察ポイント】\n① 工業製品の規格部材を住宅に転用する発想\n② カラーパネルの配色とグリッド構成\n③ ユーカリの森に囲まれた敷地との共存\n\n【実務への応用】\n既製品サッシや鋼材でコストとデザインを両立する「規格部材活用」の先進事例。大開口×断熱性能の両立ヒントも多数。',
-            },
-            {
-                time: '16:30', icon: '🌆', tag: 'free',
-                title: 'サンセット・ストリップ',
-                desc: '夕刻のサンセット大通りを散策。エンターテインメント・音楽文化の発信地として知られる歴史的なストリート。',
-                loc: 'Sunset Strip', addr: 'Sunset Blvd, West Hollywood, CA 90069', hasMap: true,
-            },
-            {
-                time: '18:00', icon: '🏨', tag: 'hotel',
-                title: 'ホテル 帰着',
-                desc: 'ザ モザイク ホテルへ帰着。',
-                loc: 'ザ モザイク ホテル', addr: '125 Spalding Dr, Beverly Hills, CA 90212', hasMap: false,
-            },
-        ]
-    },
-    {
-        day: 4, date: '6/6', label: 'Day 4',
-        fullDate: '2026年6月6日（土）',
-        title: 'ギャンブル邸・ホリーホック・ハウス → DTLA移動',
-        area: 'Pasadena → Downtown LA',
-        hotel: 'オムニ ロサンゼルス ホテル（DTLA）',
-        events: [
-            {
-                time: '08:00', icon: '🏨', tag: 'move',
-                title: 'チェックアウト・出発',
-                desc: 'ザ モザイク ホテルをチェックアウト。荷物を車に積んでパサデナへ出発。',
-                loc: 'ザ モザイク ホテル', addr: '125 Spalding Dr, Beverly Hills, CA 90212', hasMap: false,
-            },
-            {
-                time: '11:40', icon: '🏛', tag: 'arch',
-                title: 'ギャンブル邸',
-                desc: '1908年。グリーン＆グリーン設計。アメリカン・クラフツマン様式の最高傑作。日本建築の影響を受けた深い軒、精緻な木組み、ステンドグラスの照明など手仕事の美しさが細部に宿る。',
-                loc: 'Gamble House', addr: '4 Westmoreland Pl, Pasadena, CA 91103', hasMap: true,
-                architect: 'グリーン＆グリーン', year: '1908年', style: 'アメリカン・クラフツマン',
-                detail: '【視察ポイント】\n① 深い軒と庇（夏の日射遮蔽・雨仕舞の技法）\n② 精緻な木組みの継手・仕口（日本の大工技術との比較）\n③ 各部屋の素材感・照明デザインの一体感\n\n【実務への応用】\n深い軒は「夏の日射遮蔽＋中間領域としての軒下空間」として現代住宅に応用可。日本建築を取り入れたデザインのヒントが随所に。',
-            },
-            {
-                time: '15:00', icon: '🏛', tag: 'arch',
-                title: 'ホリーホック・ハウス',
-                desc: '1921年。フランク・ロイド・ライト設計。マヤ・リバイバル様式の傑作。立葵（hollyhock）の装飾モチーフが特徴的。プレキャストコンクリートブロックを使用。丘の上からLAを見下ろす。',
-                loc: 'Hollyhock House', addr: '4800 Hollywood Blvd, Los Angeles, CA 90027', hasMap: true,
-                architect: 'フランク・ロイド・ライト', year: '1921年', style: 'マヤ・リバイバル / 有機的建築',
-                detail: '【視察ポイント】\n① プレキャストコンクリートブロックの組積技法\n② 繰り返しモチーフによる装飾の統一感（立葵文様）\n③ 地形を生かした建物配置と眺望の演出\n\n【実務への応用】\nライトの「大地に根ざした建築」思想。地形・方位・眺望を設計の出発点とするアプローチは、土地の魅力を引き出す住宅設計に直結。',
-            },
-            {
-                time: '17:00', icon: '🚗', tag: 'move',
-                title: 'DTLA へ移動・チェックイン',
-                desc: 'ダウンタウンLAのオムニ ロサンゼルス ホテルへ移動してチェックイン。後半の拠点。',
-                loc: 'オムニ ロサンゼルス ホテル', addr: '251 S Olive St, Los Angeles, CA 90012', hasMap: true,
-            },
-            {
-                time: '20:00', icon: '🍽', tag: 'meal',
-                title: 'ホテル帰着・夕食',
-                desc: 'チェックインを済ませ、ダウンタウンLAで夕食。',
-                loc: 'オムニ ロサンゼルス ホテル周辺', addr: '251 S Olive St, Los Angeles, CA 90012', hasMap: true,
-            },
-        ]
-    },
-    {
-        day: 5, date: '6/7', label: 'Day 5',
-        fullDate: '2026年6月7日（日）',
-        title: '終日フリータイム ＋ MLB観戦',
-        area: 'Downtown LA',
-        hotel: 'オムニ ロサンゼルス ホテル（DTLA）',
-        events: [
-            {
-                time: '日中', icon: '✨', tag: 'free',
-                title: '自由行動・フリータイム',
-                desc: 'ショッピング、ビーチ散策、観光など思い思いの時間をお過ごしください。夜のMLB観戦に備えてリフレッシュを。',
-                loc: 'Los Angeles', addr: '', hasMap: false,
-                detail: '【おすすめスポット】\n🏖 サンタモニカ・ピア＆ビーチ（ルート66終点）\n🔭 グリフィス天文台（映画「ラ・ラ・ランド」ロケ地）\n🛍 メルローズ・アベニュー（ショッピング）\n🏛 ゲティセンター（リチャード・マイヤー設計）',
-            },
-            {
-                time: '〜推奨', icon: '🏖', tag: 'free',
-                title: 'サンタモニカ・ピア（おすすめ）',
-                desc: '太平洋岸の象徴的な観光スポット。ルート66の終着点として有名。遊園地・水族館も併設。',
-                loc: 'Santa Monica Pier', addr: '200 Santa Monica Pier, Santa Monica, CA 90401', hasMap: true,
-            },
-            {
-                time: '〜推奨', icon: '🔭', tag: 'free',
-                title: 'グリフィス天文台（おすすめ）',
-                desc: '映画「ラ・ラ・ランド」のロケ地。LAを一望できる丘の上の天文台。建物自体もアールデコの名建築。',
-                loc: 'Griffith Observatory', addr: '2800 E Observatory Rd, Los Angeles, CA 90027', hasMap: true,
-            },
-            {
-                time: '19:10', icon: '⚾', tag: 'spec',
-                title: 'MLB観戦　ドジャース vs エンゼルス',
-                desc: 'ドジャースタジアムにてメジャーリーグ観戦。試合開始19:10予定（変更の可能性あり）。スタジアムグルメや野球文化も体験してください。試合1時間前には入場を。',
-                loc: 'Dodger Stadium', addr: '1000 Vin Scully Ave, Los Angeles, CA 90012', hasMap: true,
-                detail: '【スタジアム情報】\n・収容人数：約56,000人（MLB最大級）\n・開場：1962年（歴史的スタジアム）\n・名物グルメ：ドジャードッグは必食！\n・試合開始：19:10予定\n\n【建築視察として】\n1962年設計の大規模スポーツ施設。駐車場配置・動線・眺望設計など大規模公共施設のマスタープランを体感できます。',
-            },
-            {
-                time: '23:00', icon: '🏨', tag: 'hotel',
-                title: 'ホテル 帰着',
-                desc: '試合終了後、オムニ ロサンゼルス ホテルへ帰着。',
-                loc: 'オムニ ロサンゼルス ホテル', addr: '251 S Olive St, Los Angeles, CA 90012', hasMap: false,
-            },
-        ]
-    },
-    {
-        day: 6, date: '6/8', label: 'Day 6',
-        fullDate: '2026年6月8日（月）',
-        title: 'ダウンタウン 徒歩集中視察',
-        area: 'Downtown LA（徒歩）',
-        hotel: 'オムニ ロサンゼルス ホテル（DTLA）',
-        events: [
-            {
-                time: '09:00', icon: '🚶', tag: 'move',
-                title: 'ホテル 出発（徒歩）',
-                desc: '本日は徒歩でダウンタウンの建築を集中視察します。',
-                loc: 'オムニ ロサンゼルス ホテル', addr: '251 S Olive St, Los Angeles, CA 90012', hasMap: false,
-            },
-            {
-                time: '09:30', icon: '🏛', tag: 'arch',
-                title: 'ブラッドベリービル',
-                desc: '1893年。ジョージ・ワイマン設計。LA最古の商業ビルの一つ。質素な外観と対照的に、内部には自然光が降り注ぐ壮大なアトリウム空間。精巧な鋳鉄製手すり・大理石階段・オープンケージ式エレベーターが必見。',
-                loc: 'Bradbury Building', addr: '304 S Broadway, Los Angeles, CA 90013', hasMap: true,
-                architect: 'ジョージ・ワイマン', year: '1893年', style: 'ビクトリアン・イタリアネート',
-                detail: '【視察ポイント】\n① トップライトから差し込む自然光のアトリウム効果\n② 鋳鉄装飾の精巧なディテール（手すり・階段・EV）\n③ 外観と内部のギャップによるサプライズ演出\n\n【実務への応用】\n吹き抜けアトリウムで光と風を建物深部へ導く設計思想。現代住宅のトップライト計画・吹き抜けによる家族の気配感に応用可能。',
-            },
-            {
-                time: '11:00', icon: '🎵', tag: 'arch',
-                title: 'ウォルト・ディズニー・コンサートホール',
-                desc: '2003年。フランク・ゲーリー設計。帆船をイメージしたステンレス曲面パネルが重なり合う外観。LAの文化的ランドマーク。音響設計も世界最高水準。',
-                loc: 'Walt Disney Concert Hall', addr: '111 S Grand Ave, Los Angeles, CA 90012', hasMap: true,
-                architect: 'フランク・ゲーリー', year: '2003年', style: '解体主義建築（デコンストラクティビズム）',
-                detail: '【視察ポイント】\n① ステンレス曲面パネルの反射・陰影・素材感\n② 彫刻的な外観と音楽ホールとしての機能の融合\n③ パブリックスペースとしての屋外庭園\n\n【実務への応用】\nガルバリウム鋼板等の金属外装で陰影のあるファサード演出。曲面・折り板など形状変化による個性的な外観デザインの参考事例。',
-            },
-            {
-                time: '12:30', icon: '🍽', tag: 'meal',
-                title: '昼食（グランドセントラル・マーケット）',
-                desc: '1917年創業のLA最大の屋内フードマーケット。多様なグルメが一堂に集まる歴史的市場建築。ブラッドベリービルのすぐ隣。',
-                loc: 'Grand Central Market', addr: '317 S Broadway, Los Angeles, CA 90013', hasMap: true,
-            },
-            {
-                time: '14:00', icon: '🎨', tag: 'arch',
-                title: 'ザ・ブロード 美術館',
-                desc: '2015年。ディラー・スコフィディオ＋レンフロ設計。「ヴェール・アンド・ヴォールト」コンセプト。ハニカム構造の白い多孔質外装が特徴。自然光を巧みに取り込む展示空間。隣接するディズニーCHとの対比が美しい。',
-                loc: 'The Broad Museum', addr: '221 S Grand Ave, Los Angeles, CA 90012', hasMap: true,
-                architect: 'ディラー・スコフィディオ＋レンフロ（DS+R）', year: '2015年', style: 'コンテンポラリー',
-                detail: '【視察ポイント】\n① ハニカム構造外装の採光・通風・意匠効果\n② 「ヴェール」（外皮）と「ヴォールト」（収蔵庫）の二重構造\n③ 無料公開のパブリックロビーと有料展示室の構成\n\n【実務への応用】\nハニカム構造は断熱性・軽量性に優れる。カーポートや目隠しフェンスのモジュール化・半透明スクリーンなど住宅スケールへの応用が豊富。',
-            },
-            {
-                time: '16:00', icon: '🏨', tag: 'hotel',
-                title: 'ホテル 帰着',
-                desc: '全建築視察完了。オムニ ロサンゼルス ホテルへ帰着。お疲れ様でした！',
-                loc: 'オムニ ロサンゼルス ホテル', addr: '251 S Olive St, Los Angeles, CA 90012', hasMap: false,
-            },
-        ]
-    },
-    {
-        day: 7, date: '6/9', label: 'Day 7',
-        fullDate: '2026年6月9日（火）',
-        title: '帰国移動（LAX発）',
-        area: 'Los Angeles → 機内',
-        hotel: '機内泊',
-        events: [
-            {
-                time: '06:00', icon: '⏰', tag: 'hotel',
-                title: '起床・朝食',
-                desc: '早起きして朝食を済ませ、帰国の準備をします。',
-                loc: 'オムニ ロサンゼルス ホテル', addr: '', hasMap: false,
-            },
-            {
-                time: '07:00', icon: '🏨', tag: 'move',
-                title: 'チェックアウト・出発',
-                desc: 'オムニ ロサンゼルス ホテルをチェックアウト。LAXへ向けて出発（車で約30分）。',
-                loc: 'オムニ ロサンゼルス ホテル', addr: '', hasMap: false,
-            },
-            {
-                time: '07:30', icon: '🚗', tag: 'move',
-                title: 'LAX 到着・レンタカー返却',
-                desc: 'LAXにてレンタカーを返却。チェックイン・搭乗手続きへ。',
-                loc: 'LAX Airport', addr: 'Los Angeles International Airport, Los Angeles, CA', hasMap: true,
-            },
-            {
-                time: '10:25', icon: '✈️', tag: 'move',
-                title: 'LAX 出発（成田行き）',
-                desc: 'JL061便にてLAXを出発。国際日付変更線を通過して成田へ向かいます。機内泊となります。',
-                loc: 'LAX Airport', addr: 'Los Angeles International Airport, Los Angeles, CA', hasMap: true,
-            },
-        ]
-    },
-    {
-        day: 8, date: '6/10', label: 'Day 8',
-        fullDate: '2026年6月10日（水）',
-        title: '成田到着・解散',
-        area: '成田',
-        hotel: '－（解散）',
-        events: [
-            {
-                time: '14:10', icon: '🛬', tag: 'move',
-                title: '成田国際空港 着',
-                desc: 'JL061便にて成田国際空港に到着。7泊8日の建築視察研修ツアー終了。現地で得た知見をぜひ今後の設計・事業にお役立てください。',
-                loc: '成田国際空港', addr: '成田国際空港, 千葉県成田市', hasMap: true,
-            },
-            {
-                time: '到着後', icon: '🎉', tag: 'free',
-                title: 'ツアー解散',
-                desc: '8日間の研修お疲れ様でした！各自で帰路につきます。',
-                loc: '成田国際空港', addr: '', hasMap: false,
-            },
-        ]
-    },
+/* ════════════════════════
+   DEFAULT DATA
+════════════════════════ */
+const DEFAULT_DAYS = [
+  {
+    day:1, date:'6/3', label:'Day 1', fullDate:'2026年6月3日（水）',
+    title:'到着・ビバリーヒルズ散策', area:'Beverly Hills', hotel:'ザ モザイク ホテル（BH）',
+    events:[
+      { time:'前日出発', icon:'✈️', tag:'move', title:'成田空港 出発', desc:'JL062便にて成田を出発。約10時間のフライトでLAXへ向かいます。', loc:'成田国際空港', addr:'成田国際空港, 千葉県成田市', hasMap:true },
+      { time:'08:25',   icon:'🛬', tag:'move', title:'LAX 到着・入国', desc:'入国審査を経て、レンタカー手続き（2台）を行います。', loc:'Los Angeles International Airport', addr:'Los Angeles International Airport, Los Angeles, CA', hasMap:true },
+      { time:'11:00',   icon:'🏨', tag:'hotel', title:'ホテル チェックイン', desc:'ザ モザイク ホテルにチェックイン。荷物を預けて時差調整の休憩を取ります。', loc:'ザ モザイク ホテル', addr:'125 Spalding Dr, Beverly Hills, CA 90212', hasMap:true },
+      { time:'13:00',   icon:'🍽', tag:'meal', title:'昼食', desc:'ホテル周辺のカフェで昼食。ビバリーヒルズの雰囲気を感じながら時差調整を。', loc:'ビバリーヒルズ周辺', addr:'Beverly Hills, CA 90210', hasMap:true },
+      { time:'15:00',   icon:'🛍', tag:'arch', title:'ロデオドライブ 散策', desc:'世界有数の高級ブティック街。各ブランドが競うように独自の建築デザインを採用した商業建築のショーケース。', loc:'Rodeo Drive', addr:'Rodeo Dr, Beverly Hills, CA 90210', hasMap:true, detail:'【視察ポイント】\n・各ブランド旗艦店のファサードデザインと差別化戦略\n・路面店建築における採光・開口部の工夫\n・街並みと個性の両立' },
+      { time:'18:00',   icon:'🍽', tag:'meal', title:'ディナー', desc:'ビバリーヒルズエリアにてディナー。', loc:'ビバリーヒルズ', addr:'Beverly Hills, CA 90210', hasMap:true },
+    ]
+  },
+  {
+    day:2, date:'6/4', label:'Day 2', fullDate:'2026年6月4日（木）',
+    title:'ユニバーサルスタジオ・ハリウッド（終日）', area:'Universal City', hotel:'ザ モザイク ホテル（BH）',
+    events:[
+      { time:'09:00', icon:'🚗', tag:'move', title:'ホテル 出発', desc:'ホテルを出発してユニバーサルスタジオへ向かいます（約30分）。', loc:'', addr:'', hasMap:false },
+      { time:'10:00', icon:'🎢', tag:'spec', title:'ユニバーサルスタジオ・ハリウッド 到着', desc:'映画スタジオとテーマパークが融合した世界最大級のエンターテインメント施設。', loc:'Universal Studios Hollywood', addr:'100 Universal City Plaza, Universal City, CA 91608', hasMap:true, detail:'【体験ポイント】\n・スタジオツアーで映画セットの空間演出を体感\n・大規模施設の動線設計・サインデザイン\n・テーマパーク建築の没入感演出技法' },
+      { time:'10:30', icon:'🎬', tag:'free', title:'終日 パーク内自由行動', desc:'スタジオツアー、各種アトラクションを自由に体験。', loc:'', addr:'', hasMap:false },
+      { time:'18:00', icon:'🚗', tag:'move', title:'パーク 出発', desc:'パークを出発。ホテルへ向かいます（約45分）。', loc:'', addr:'', hasMap:false },
+      { time:'19:00', icon:'🏨', tag:'hotel', title:'ホテル 帰着', desc:'ザ モザイク ホテルへ帰着。明日の建築視察に備えて休息。', loc:'', addr:'', hasMap:false },
+    ]
+  },
+  {
+    day:3, date:'6/5', label:'Day 3', fullDate:'2026年6月5日（金）',
+    title:'シンドラー・ハウス ＋ イームズ・ハウス', area:'West Hollywood / Pacific Palisades', hotel:'ザ モザイク ホテル（BH）',
+    events:[
+      { time:'11:00', icon:'🏠', tag:'arch', title:'シンドラー・ハウス（MAK Center）', desc:'1921-22年。R.M.シンドラー設計。傾斜型枠コンクリート壁と可動パネル・木製フレームの融合。カリフォルニア・モダニズムの原点。', loc:'MAK Center / Schindler House', addr:'835 N Kings Rd, West Hollywood, CA 90069', hasMap:true, architect:'R.M. シンドラー', year:'1921-22年', style:'カリフォルニア・モダニズム', detail:'【視察ポイント】\n① 傾斜型枠コンクリート壁の表情と質感\n② 可動パネルによる屋内・屋外境界の曖昧化\n③ 協同生活のための独創的な空間構成' },
+      { time:'13:00', icon:'🍽', tag:'meal', title:'昼食（メルローズ・アベニュー）', desc:'メルローズ通り沿いのレストランで昼食。', loc:'Melrose Avenue', addr:'Melrose Ave, West Hollywood, CA 90046', hasMap:true },
+      { time:'14:30', icon:'🏠', tag:'arch', title:'イームズ・ハウス（Case Study House #8）', desc:'1949年。チャールズ＆レイ・イームズ設計。規格部材を用いた実験住宅。モンドリアン風カラフルパネルと軽快な鉄骨フレームが特徴。', loc:'Eames House', addr:'203 Chautauqua Blvd, Pacific Palisades, CA 90272', hasMap:true, architect:'チャールズ＆レイ・イームズ', year:'1949年', style:'ケーススタディ・ハウス（プレファブ）', detail:'【視察ポイント】\n① 工業製品の規格部材を住宅に転用する発想\n② カラーパネルの配色とグリッド構成\n③ ユーカリの森に囲まれた敷地との共存' },
+      { time:'16:30', icon:'🌆', tag:'free', title:'サンセット・ストリップ', desc:'夕刻のサンセット大通りを散策。エンターテインメント文化の発信地。', loc:'Sunset Strip', addr:'Sunset Blvd, West Hollywood, CA 90069', hasMap:true },
+      { time:'18:00', icon:'🏨', tag:'hotel', title:'ホテル 帰着', desc:'ザ モザイク ホテルへ帰着。', loc:'', addr:'', hasMap:false },
+    ]
+  },
+  {
+    day:4, date:'6/6', label:'Day 4', fullDate:'2026年6月6日（土）',
+    title:'ギャンブル邸・ホリーホック・ハウス → DTLA移動', area:'Pasadena → Downtown LA', hotel:'オムニ ロサンゼルス ホテル（DTLA）',
+    events:[
+      { time:'08:00', icon:'🏨', tag:'move', title:'チェックアウト・出発', desc:'ザ モザイク ホテルをチェックアウト。パサデナへ出発。', loc:'', addr:'', hasMap:false },
+      { time:'11:40', icon:'🏛', tag:'arch', title:'ギャンブル邸', desc:'1908年。グリーン＆グリーン設計。アメリカン・クラフツマン様式の最高傑作。日本建築の影響を受けた深い軒、精緻な木組み。', loc:'Gamble House', addr:'4 Westmoreland Pl, Pasadena, CA 91103', hasMap:true, architect:'グリーン＆グリーン', year:'1908年', style:'アメリカン・クラフツマン', detail:'【視察ポイント】\n① 深い軒と庇（夏の日射遮蔽・雨仕舞の技法）\n② 精緻な木組みの継手・仕口\n③ 日本建築からの影響' },
+      { time:'15:00', icon:'🏛', tag:'arch', title:'ホリーホック・ハウス', desc:'1921年。フランク・ロイド・ライト設計。マヤ・リバイバル様式。立葵の装飾モチーフ、プレキャストコンクリートブロック使用。', loc:'Hollyhock House', addr:'4800 Hollywood Blvd, Los Angeles, CA 90027', hasMap:true, architect:'フランク・ロイド・ライト', year:'1921年', style:'マヤ・リバイバル / 有機的建築', detail:'【視察ポイント】\n① プレキャストコンクリートブロックの組積技法\n② 繰り返しモチーフによる装飾の統一感\n③ 地形を生かした建物配置と眺望の演出' },
+      { time:'17:00', icon:'🚗', tag:'move', title:'DTLA へ移動・チェックイン', desc:'オムニ ロサンゼルス ホテルへ移動してチェックイン。', loc:'オムニ ロサンゼルス ホテル', addr:'251 S Olive St, Los Angeles, CA 90012', hasMap:true },
+      { time:'20:00', icon:'🍽', tag:'meal', title:'夕食', desc:'ダウンタウンLAで夕食。', loc:'オムニ ロサンゼルス ホテル周辺', addr:'251 S Olive St, Los Angeles, CA 90012', hasMap:true },
+    ]
+  },
+  {
+    day:5, date:'6/7', label:'Day 5', fullDate:'2026年6月7日（日）',
+    title:'終日フリータイム ＋ MLB観戦', area:'Downtown LA', hotel:'オムニ ロサンゼルス ホテル（DTLA）',
+    events:[
+      { time:'日中',   icon:'✨', tag:'free', title:'自由行動・フリータイム', desc:'ショッピング、ビーチ散策、観光など思い思いの時間をお過ごしください。', loc:'', addr:'', hasMap:false, detail:'【おすすめスポット】\n🏖 サンタモニカ・ピア＆ビーチ\n🔭 グリフィス天文台\n🛍 メルローズ・アベニュー' },
+      { time:'〜推奨', icon:'🏖', tag:'free', title:'サンタモニカ・ピア', desc:'太平洋岸の象徴的な観光スポット。ルート66の終着点。', loc:'Santa Monica Pier', addr:'200 Santa Monica Pier, Santa Monica, CA 90401', hasMap:true },
+      { time:'〜推奨', icon:'🔭', tag:'free', title:'グリフィス天文台', desc:'映画「ラ・ラ・ランド」のロケ地。LAを一望できる丘の上の天文台。アールデコの名建築。', loc:'Griffith Observatory', addr:'2800 E Observatory Rd, Los Angeles, CA 90027', hasMap:true },
+      { time:'19:10', icon:'⚾', tag:'spec', title:'MLB観戦　ドジャース vs エンゼルス', desc:'ドジャースタジアムにてメジャーリーグ観戦。試合開始19:10予定。スタジアムグルメや野球文化も体験。', loc:'Dodger Stadium', addr:'1000 Vin Scully Ave, Los Angeles, CA 90012', hasMap:true, detail:'【情報】\n・収容人数：約56,000人\n・名物グルメ：ドジャードッグは必食！\n・試合開始：19:10予定' },
+      { time:'23:00', icon:'🏨', tag:'hotel', title:'ホテル 帰着', desc:'試合終了後、ホテルへ帰着。', loc:'', addr:'', hasMap:false },
+    ]
+  },
+  {
+    day:6, date:'6/8', label:'Day 6', fullDate:'2026年6月8日（月）',
+    title:'ダウンタウン 徒歩集中視察', area:'Downtown LA（徒歩）', hotel:'オムニ ロサンゼルス ホテル（DTLA）',
+    events:[
+      { time:'09:00', icon:'🚶', tag:'move', title:'ホテル 出発（徒歩）', desc:'本日は徒歩でダウンタウンの建築を集中視察します。', loc:'', addr:'', hasMap:false },
+      { time:'09:30', icon:'🏛', tag:'arch', title:'ブラッドベリービル', desc:'1893年。ジョージ・ワイマン設計。LA最古の商業ビルの一つ。内部は自然光が降り注ぐ壮大なアトリウム空間。鋳鉄製手すり・オープンケージ式ELVが必見。', loc:'Bradbury Building', addr:'304 S Broadway, Los Angeles, CA 90013', hasMap:true, architect:'ジョージ・ワイマン', year:'1893年', style:'ビクトリアン・イタリアネート', detail:'【視察ポイント】\n① トップライトから差し込む自然光のアトリウム効果\n② 鋳鉄装飾の精巧なディテール\n③ 外観と内部のギャップによるサプライズ演出' },
+      { time:'11:00', icon:'🎵', tag:'arch', title:'ウォルト・ディズニー・コンサートホール', desc:'2003年。フランク・ゲーリー設計。帆船をイメージしたステンレス曲面パネル。LAの文化的ランドマーク。', loc:'Walt Disney Concert Hall', addr:'111 S Grand Ave, Los Angeles, CA 90012', hasMap:true, architect:'フランク・ゲーリー', year:'2003年', style:'解体主義建築（デコンストラクティビズム）', detail:'【視察ポイント】\n① ステンレス曲面パネルの反射・陰影・素材感\n② 彫刻的な外観と音楽ホールとしての機能の融合\n③ パブリックスペースとしての屋外庭園' },
+      { time:'12:30', icon:'🍽', tag:'meal', title:'昼食（グランドセントラル・マーケット）', desc:'1917年創業のLA最大の屋内フードマーケット。多様なグルメが一堂に集まる歴史的市場建築。', loc:'Grand Central Market', addr:'317 S Broadway, Los Angeles, CA 90013', hasMap:true },
+      { time:'14:00', icon:'🎨', tag:'arch', title:'ザ・ブロード 美術館', desc:'2015年。DS+R設計。ハニカム構造の白い多孔質外装が特徴。自然光を巧みに取り込む展示空間。', loc:'The Broad Museum', addr:'221 S Grand Ave, Los Angeles, CA 90012', hasMap:true, architect:'ディラー・スコフィディオ＋レンフロ（DS+R）', year:'2015年', style:'コンテンポラリー', detail:'【視察ポイント】\n① ハニカム構造外装の採光・通風・意匠効果\n② 「ヴェール」と「ヴォールト」の二重構造\n③ パブリックロビーと有料展示室の構成' },
+      { time:'16:00', icon:'🏨', tag:'hotel', title:'ホテル 帰着', desc:'全建築視察完了。オムニ ロサンゼルス ホテルへ帰着。お疲れ様でした！', loc:'', addr:'', hasMap:false },
+    ]
+  },
+  {
+    day:7, date:'6/9', label:'Day 7', fullDate:'2026年6月9日（火）',
+    title:'帰国移動（LAX発）', area:'Los Angeles → 機内', hotel:'機内泊',
+    events:[
+      { time:'06:00', icon:'⏰', tag:'hotel', title:'起床・朝食', desc:'早起きして朝食を済ませ、帰国の準備をします。', loc:'', addr:'', hasMap:false },
+      { time:'07:00', icon:'🏨', tag:'move', title:'チェックアウト・出発', desc:'オムニ ロサンゼルス ホテルをチェックアウト。LAXへ出発（約30分）。', loc:'', addr:'', hasMap:false },
+      { time:'07:30', icon:'🚗', tag:'move', title:'LAX 到着・レンタカー返却', desc:'LAXにてレンタカーを返却。チェックイン・搭乗手続きへ。', loc:'LAX Airport', addr:'Los Angeles International Airport, Los Angeles, CA', hasMap:true },
+      { time:'10:25', icon:'✈️', tag:'move', title:'LAX 出発（成田行き）', desc:'JL061便にてLAXを出発。国際日付変更線を通過して成田へ。機内泊。', loc:'LAX Airport', addr:'Los Angeles International Airport, Los Angeles, CA', hasMap:true },
+    ]
+  },
+  {
+    day:8, date:'6/10', label:'Day 8', fullDate:'2026年6月10日（水）',
+    title:'成田到着・解散', area:'成田', hotel:'－（解散）',
+    events:[
+      { time:'14:10', icon:'🛬', tag:'move', title:'成田国際空港 着', desc:'JL061便にて成田国際空港に到着。7泊8日の研修ツアー終了。', loc:'成田国際空港', addr:'成田国際空港, 千葉県成田市', hasMap:true },
+      { time:'到着後', icon:'🎉', tag:'free', title:'ツアー解散', desc:'8日間の研修お疲れ様でした！各自で帰路につきます。', loc:'', addr:'', hasMap:false },
+    ]
+  },
 ];
 
+/* ════════════════════════
+   CONFIG
+════════════════════════ */
+const STORAGE_KEY = 'la-tour-2026-v2';
+const TAG = {
+  arch:  { cls:'t-arch',  dot:'',           label:'建築視察' },
+  spec:  { cls:'t-spec',  dot:'dot-special', label:'スペシャル' },
+  meal:  { cls:'t-meal',  dot:'dot-meal',    label:'食事' },
+  move:  { cls:'t-move',  dot:'dot-move',    label:'移動' },
+  free:  { cls:'t-free',  dot:'',            label:'フリー' },
+  hotel: { cls:'t-hotel', dot:'',            label:'ホテル' },
+};
+const TAG_ICONS  = { arch:'🏛', spec:'⭐', meal:'🍽', move:'🚗', free:'✨', hotel:'🏨' };
+const ALL_ICONS  = ['✈️','🛬','🏨','🍽','🚗','🏛','🏠','🎢','🎬','🎵','🎨','⚾','🔭','🏖','🛍','🌆','🚶','⏰','🎉','✨','⭐','📍','🗺','🍺','☕','🎤','🖼','🌊'];
+
+/* ════════════════════════
+   STATE
+════════════════════════ */
+let SCHEDULE  = [];
+let editMode  = false;
 let activeDay = 0;
+let editingDay = -1;
+let editingEv  = -1;
 
+/* ════════════════════════
+   PERSISTENCE
+════════════════════════ */
+function loadSchedule() {
+  try {
+    const s = localStorage.getItem(STORAGE_KEY);
+    SCHEDULE = s ? JSON.parse(s) : deepCopy(DEFAULT_DAYS);
+  } catch { SCHEDULE = deepCopy(DEFAULT_DAYS); }
+}
+function saveSchedule() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(SCHEDULE)); } catch {}
+}
+function confirmReset() {
+  if (!confirm('スケジュールをすべて初期データに戻しますか？\nこの操作は元に戻せません。')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  SCHEDULE = deepCopy(DEFAULT_DAYS);
+  renderDay();
+}
+function deepCopy(x) { return JSON.parse(JSON.stringify(x)); }
+
+/* ════════════════════════
+   EDIT MODE TOGGLE
+════════════════════════ */
+function toggleEditMode() {
+  editMode = !editMode;
+  const btn = document.getElementById('editToggle');
+  btn.textContent = editMode ? '✅ 完了' : '✏️ 編集';
+  btn.classList.toggle('active', editMode);
+  document.getElementById('editBanner').style.display = editMode ? 'flex' : 'none';
+  document.getElementById('mainArea').classList.toggle('edit-mode', editMode);
+  renderDay();
+}
+
+/* ════════════════════════
+   TABS & RENDER
+════════════════════════ */
 function buildTabs() {
-    const el = document.getElementById('dayTabs');
-    DAYS.forEach((d, i) => {
-        const tab = document.createElement('div');
-        tab.className = 'day-tab' + (i === 0 ? ' active' : '');
-        tab.innerHTML = `<span class="dn">${d.label}</span><span class="dd">${d.date}</span>`;
-        tab.addEventListener('click', () => selectDay(i));
-        el.appendChild(tab);
-    });
+  const el = document.getElementById('dayTabs');
+  SCHEDULE.forEach((d, i) => {
+    const tab = document.createElement('div');
+    tab.className = 'day-tab' + (i === 0 ? ' active' : '');
+    tab.innerHTML = `<span class="dn">${d.label}</span><span class="dd">${d.date}</span>`;
+    tab.addEventListener('click', () => selectDay(i));
+    el.appendChild(tab);
+  });
 }
-
 function selectDay(i) {
-    activeDay = i;
-    document.querySelectorAll('.day-tab').forEach((t, j) => t.classList.toggle('active', j === i));
-    const tab = document.querySelector(`.day-tab:nth-child(${i + 1})`);
-    if (tab) tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-    renderDay(DAYS[i]);
+  activeDay = i;
+  document.querySelectorAll('.day-tab').forEach((t, j) => t.classList.toggle('active', j === i));
+  document.querySelector(`.day-tab:nth-child(${i+1})`)
+    ?.scrollIntoView({ behavior:'smooth', block:'nearest', inline:'center' });
+  renderDay();
 }
+function renderDay() {
+  const d = SCHEDULE[activeDay];
 
-function renderDay(d) {
-    const hdr = document.getElementById('dayHeader');
-    hdr.innerHTML = `
-        <h2>${d.fullDate}　${d.title}</h2>
-        <div class="badges">
-            <span class="badge badge-area">📍 ${d.area}</span>
-            <span class="badge badge-hotel">🏨 ${d.hotel}</span>
-        </div>`;
+  // header
+  document.getElementById('dayHeader').innerHTML = `
+    <h2>${d.fullDate}　${d.title}</h2>
+    <div class="badges">
+      <span class="badge badge-area">📍 ${d.area}</span>
+      <span class="badge badge-hotel">🏨 ${d.hotel}</span>
+    </div>`;
 
-    const tl = document.getElementById('timeline');
-    tl.innerHTML = '';
+  // timeline
+  const tl = document.getElementById('timeline');
+  tl.innerHTML = '';
+  const total = d.events.length;
 
-    d.events.forEach(ev => {
-        const cfg = TAG[ev.tag] || TAG.free;
-        const clickable = ev.hasMap || ev.detail;
-        const card = document.createElement('div');
-        card.className = 'event-card';
-        card.innerHTML = `
-            <div class="event-time">${ev.time}</div>
-            <div class="event-dot ${cfg.dot}"></div>
-            <div class="event-body${clickable ? ' clickable' : ''}">
-                <div class="ev-head">
-                    <span class="ev-icon">${ev.icon}</span>
-                    <span class="ev-title">${ev.title}</span>
-                    <span class="ev-tag ${cfg.cls}">${cfg.label}</span>
-                </div>
-                <div class="ev-desc">${ev.desc}</div>
-                ${ev.hasMap && ev.loc ? `<div class="ev-loc">📍 ${ev.loc}</div>` : ''}
-                ${clickable ? `<div class="ev-hint">👆 タップして詳細・地図を見る</div>` : ''}
-            </div>`;
-        if (clickable) card.querySelector('.event-body').addEventListener('click', () => openModal(ev));
-        tl.appendChild(card);
-    });
-}
-
-function openModal(ev) {
+  d.events.forEach((ev, evIdx) => {
     const cfg = TAG[ev.tag] || TAG.free;
-    const modal = document.getElementById('modal');
-
-    let archBlock = '';
-    if (ev.architect) {
-        archBlock = `
-            <div class="m-section">
-                <h3>建築情報</h3>
-                <div class="arch-pills">
-                    <span class="arch-pill">🏗 ${ev.architect}</span>
-                    <span class="arch-pill">📅 ${ev.year}</span>
-                    <span class="arch-pill">🎨 ${ev.style}</span>
-                </div>
-            </div>
-            <div class="m-divider"></div>`;
-    }
-
-    let detailBlock = '';
-    if (ev.detail) {
-        detailBlock = `
-            <div class="m-section">
-                <h3>詳細・視察ポイント</h3>
-                <p>${ev.detail.replace(/\n/g, '<br>')}</p>
-            </div>
-            <div class="m-divider"></div>`;
-    }
-
-    let mapBtn = '';
-    if (ev.hasMap && ev.addr) {
-        const q = encodeURIComponent(ev.addr);
-        const src = `https://maps.google.com/maps?q=${q}&output=embed&hl=ja`;
-        mapBtn = `<div class="m-section"><h3>地図</h3></div>
-        <iframe class="map-frame" src="${src}" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
-    }
-
-    modal.innerHTML = `
-        <div class="modal-handle"></div>
-        <div class="modal-head">
-            <div class="modal-icon-wrap">${ev.icon}</div>
-            <div>
-                <div class="modal-title">${ev.title}</div>
-                <div class="modal-time-tag">
-                    <span class="modal-time-text">${ev.time}</span>
-                    <span class="ev-tag ${cfg.cls}">${cfg.label}</span>
-                </div>
-            </div>
-            <button class="modal-close" onclick="closeModal()">✕</button>
+    const clickable = !editMode && (ev.hasMap || ev.detail);
+    const card = document.createElement('div');
+    card.className = 'event-card';
+    card.innerHTML = `
+      <div class="event-time">${ev.time}</div>
+      <div class="event-dot ${cfg.dot}"></div>
+      <div class="event-body${clickable ? ' clickable' : ''}">
+        <div class="ev-head">
+          <span class="ev-icon">${ev.icon}</span>
+          <span class="ev-title">${ev.title}</span>
+          <span class="ev-tag ${cfg.cls}">${cfg.label}</span>
         </div>
-        <div class="m-divider"></div>
-        ${archBlock}
-        <div class="m-section">
-            <h3>概要</h3>
-            <p>${ev.desc}</p>
+        <div class="ev-desc">${ev.desc}</div>
+        ${ev.hasMap && ev.loc && !editMode ? `<div class="ev-loc">📍 ${ev.loc}</div>` : ''}
+        ${clickable ? `<div class="ev-hint">👆 タップして詳細・地図を見る</div>` : ''}
+        <div class="edit-strip">
+          <div class="move-btns">
+            <button class="strip-btn btn-up"   title="上へ移動" ${evIdx===0?'disabled':''}>▲</button>
+            <button class="strip-btn btn-down" title="下へ移動" ${evIdx===total-1?'disabled':''}>▼</button>
+          </div>
+          <button class="strip-btn btn-edit-ev">✏️ 編集</button>
+          <button class="strip-btn btn-del">🗑 削除</button>
         </div>
-        <div class="m-divider"></div>
-        ${detailBlock}
-        ${ev.hasMap && ev.loc ? `
-        <div class="m-section">
-            <h3>場所</h3>
-            <p>📍 ${ev.loc}</p>
-        </div>` : ''}
-        ${mapBtn}`;
+      </div>`;
 
-    document.getElementById('overlay').classList.add('open');
+    if (clickable) {
+      card.querySelector('.event-body').addEventListener('click', () => openDetailModal(activeDay, evIdx));
+    }
+    card.querySelector('.btn-up')     .addEventListener('click', (e) => { e.stopPropagation(); moveEvent(activeDay, evIdx, -1); });
+    card.querySelector('.btn-down')   .addEventListener('click', (e) => { e.stopPropagation(); moveEvent(activeDay, evIdx,  1); });
+    card.querySelector('.btn-edit-ev').addEventListener('click', (e) => { e.stopPropagation(); openEditForm(activeDay, evIdx); });
+    card.querySelector('.btn-del')    .addEventListener('click', (e) => { e.stopPropagation(); deleteEvent(activeDay, evIdx); });
+    tl.appendChild(card);
+  });
 }
 
-function closeModal() {
-    document.getElementById('overlay').classList.remove('open');
+/* ════════════════════════
+   DATA OPERATIONS
+════════════════════════ */
+function moveEvent(dayIdx, evIdx, dir) {
+  const evs = SCHEDULE[dayIdx].events;
+  const to = evIdx + dir;
+  if (to < 0 || to >= evs.length) return;
+  [evs[evIdx], evs[to]] = [evs[to], evs[evIdx]];
+  saveSchedule(); renderDay();
+}
+function deleteEvent(dayIdx, evIdx) {
+  const title = SCHEDULE[dayIdx].events[evIdx].title;
+  if (!confirm(`「${title}」を削除しますか？`)) return;
+  SCHEDULE[dayIdx].events.splice(evIdx, 1);
+  saveSchedule(); renderDay();
 }
 
+/* ════════════════════════
+   DETAIL MODAL
+════════════════════════ */
+function openDetailModal(dayIdx, evIdx) {
+  const ev  = SCHEDULE[dayIdx].events[evIdx];
+  const cfg = TAG[ev.tag] || TAG.free;
+  let archBlock = '';
+  if (ev.architect) {
+    archBlock = `<div class="m-section"><h3>建築情報</h3>
+      <div class="arch-pills">
+        <span class="arch-pill">🏗 ${ev.architect}</span>
+        <span class="arch-pill">📅 ${ev.year}</span>
+        <span class="arch-pill">🎨 ${ev.style}</span>
+      </div></div><div class="m-divider"></div>`;
+  }
+  const detailBlock = ev.detail
+    ? `<div class="m-section"><h3>詳細・視察ポイント</h3><p>${ev.detail.replace(/\n/g,'<br>')}</p></div><div class="m-divider"></div>` : '';
+  let mapBlock = '';
+  if (ev.hasMap && ev.addr) {
+    const q = encodeURIComponent(ev.addr);
+    mapBlock = `<div class="m-section"><h3>地図</h3></div>
+      <iframe class="map-frame" src="https://maps.google.com/maps?q=${q}&output=embed&hl=ja" allowfullscreen loading="lazy"></iframe>`;
+  }
+  document.getElementById('modal').innerHTML = `
+    <div class="modal-handle"></div>
+    <div class="modal-head">
+      <div class="modal-icon-wrap">${ev.icon}</div>
+      <div>
+        <div class="modal-title">${ev.title}</div>
+        <div class="modal-time-tag">
+          <span class="modal-time-text">${ev.time}</span>
+          <span class="ev-tag ${cfg.cls}">${cfg.label}</span>
+        </div>
+      </div>
+      <button class="modal-close" onclick="closeDetailModal()">✕</button>
+    </div>
+    <div class="m-divider"></div>
+    ${archBlock}
+    <div class="m-section"><h3>概要</h3><p>${ev.desc}</p></div>
+    <div class="m-divider"></div>
+    ${detailBlock}
+    ${ev.hasMap && ev.loc ? `<div class="m-section"><h3>場所</h3><p>📍 ${ev.loc}</p></div>` : ''}
+    ${mapBlock}`;
+  document.getElementById('overlay').classList.add('open');
+}
+function closeDetailModal() { document.getElementById('overlay').classList.remove('open'); }
 document.getElementById('overlay').addEventListener('click', e => {
-    if (e.target === document.getElementById('overlay')) closeModal();
+  if (e.target === document.getElementById('overlay')) closeDetailModal();
 });
 
+/* ════════════════════════
+   EDIT FORM
+════════════════════════ */
+function openAddForm() {
+  editingDay = activeDay; editingEv = -1;
+  buildForm(null);
+  document.getElementById('formOverlay').classList.add('open');
+}
+function openEditForm(dayIdx, evIdx) {
+  editingDay = dayIdx; editingEv = evIdx;
+  buildForm(SCHEDULE[dayIdx].events[evIdx]);
+  document.getElementById('formOverlay').classList.add('open');
+}
+function closeEditForm() { document.getElementById('formOverlay').classList.remove('open'); }
+document.getElementById('formOverlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('formOverlay')) closeEditForm();
+});
+
+function buildForm(ev) {
+  const isNew  = !ev;
+  const isArch = ev?.tag === 'arch';
+  const tagOpts = Object.entries(TAG)
+    .map(([k,v]) => `<option value="${k}" ${ev?.tag===k?'selected':''}>${v.label}</option>`)
+    .join('');
+  const iconPicker = ALL_ICONS
+    .map(ic => `<span class="icon-opt${ev?.icon===ic?' selected':''}" data-icon="${ic}">${ic}</span>`)
+    .join('');
+
+  document.getElementById('formModal').innerHTML = `
+    <div class="modal-handle"></div>
+    <div class="form-title">
+      <span>${isNew ? '＋ イベントを追加' : '✏️ イベントを編集'}</span>
+      <button class="modal-close" onclick="closeEditForm()">✕</button>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">時刻</label>
+        <input class="form-input" id="f-time" type="text" placeholder="09:00 / 日中 / 未定" value="${ev?.time||''}">
+      </div>
+      <div class="form-group">
+        <label class="form-label">カテゴリ</label>
+        <select class="form-select" id="f-tag">${tagOpts}</select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">アイコン</label>
+      <input class="form-input" id="f-icon" type="text" placeholder="絵文字を直接入力も可" value="${ev?.icon||''}">
+      <div class="icon-picker" id="iconPicker">${iconPicker}</div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">タイトル <span class="form-req">*</span></label>
+      <input class="form-input" id="f-title" type="text" placeholder="イベントタイトル" value="${ev?.title||''}">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">概要</label>
+      <textarea class="form-textarea" id="f-desc" placeholder="イベントの説明・概要">${ev?.desc||''}</textarea>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">詳細・視察ポイント</label>
+      <textarea class="form-textarea" id="f-detail" placeholder="視察ポイント、注意事項など">${ev?.detail||''}</textarea>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">場所名</label>
+        <input class="form-input" id="f-loc" type="text" placeholder="場所の名称" value="${ev?.loc||''}">
+      </div>
+      <div class="form-group" style="display:flex;align-items:flex-end;padding-bottom:4px">
+        <div class="checkbox-row">
+          <input type="checkbox" id="f-hasMap" ${ev?.hasMap?'checked':''}>
+          <label for="f-hasMap">地図を表示</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">住所・検索ワード（Google Maps用）</label>
+      <input class="form-input" id="f-addr" type="text" placeholder="例: 111 S Grand Ave, Los Angeles, CA" value="${ev?.addr||''}">
+    </div>
+
+    <div class="arch-fields" id="archFields" style="display:${isArch?'block':'none'}">
+      <div class="form-group">
+        <label class="form-label">設計者</label>
+        <input class="form-input" id="f-architect" type="text" placeholder="建築家名" value="${ev?.architect||''}">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">竣工年</label>
+          <input class="form-input" id="f-year" type="text" placeholder="1921年" value="${ev?.year||''}">
+        </div>
+        <div class="form-group">
+          <label class="form-label">建築様式</label>
+          <input class="form-input" id="f-style" type="text" placeholder="モダニズムなど" value="${ev?.style||''}">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button class="btn-cancel-form" onclick="closeEditForm()">キャンセル</button>
+      <button class="btn-save" onclick="saveForm()">💾 保存する</button>
+    </div>`;
+
+  // category → arch fields toggle
+  document.getElementById('f-tag').addEventListener('change', () => {
+    document.getElementById('archFields').style.display =
+      document.getElementById('f-tag').value === 'arch' ? 'block' : 'none';
+  });
+
+  // icon picker clicks
+  document.getElementById('iconPicker').addEventListener('click', e => {
+    const opt = e.target.closest('.icon-opt');
+    if (!opt) return;
+    document.getElementById('f-icon').value = opt.dataset.icon;
+    document.querySelectorAll('.icon-opt').forEach(el => el.classList.toggle('selected', el === opt));
+  });
+}
+
+function saveForm() {
+  const title = document.getElementById('f-title').value.trim();
+  if (!title) { alert('タイトルを入力してください。'); return; }
+
+  const tag = document.getElementById('f-tag').value;
+  const ev  = {
+    time:   document.getElementById('f-time').value.trim() || '未定',
+    icon:   document.getElementById('f-icon').value.trim() || TAG_ICONS[tag] || '📌',
+    tag,
+    title,
+    desc:   document.getElementById('f-desc').value.trim(),
+    loc:    document.getElementById('f-loc').value.trim(),
+    addr:   document.getElementById('f-addr').value.trim(),
+    hasMap: document.getElementById('f-hasMap').checked,
+  };
+  const detail = document.getElementById('f-detail').value.trim();
+  if (detail) ev.detail = detail;
+
+  if (tag === 'arch') {
+    const arch  = document.getElementById('f-architect').value.trim();
+    const year  = document.getElementById('f-year').value.trim();
+    const style = document.getElementById('f-style').value.trim();
+    if (arch)  ev.architect = arch;
+    if (year)  ev.year      = year;
+    if (style) ev.style     = style;
+  }
+
+  if (editingEv === -1) {
+    SCHEDULE[editingDay].events.push(ev);
+  } else {
+    SCHEDULE[editingDay].events[editingEv] = ev;
+  }
+  saveSchedule();
+  closeEditForm();
+  renderDay();
+}
+
+/* ════════════════════════
+   INIT
+════════════════════════ */
+loadSchedule();
 buildTabs();
-renderDay(DAYS[0]);
+renderDay();
 </script>
 </body>
 </html>
