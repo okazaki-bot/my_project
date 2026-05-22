@@ -127,9 +127,9 @@
         "tag": "hotel",
         "title": "ホテル 帰着",
         "desc": "ザ モザイク ホテルへ帰着。明日の建築視察に備えて休息。",
-        "loc": "",
-        "addr": "",
-        "hasMap": false
+        "loc": "モザイクホテル",
+        "addr": "125 Spalding Dr, Beverly Hills, CA 90212",
+        "hasMap": true
       }
     ]
   },
