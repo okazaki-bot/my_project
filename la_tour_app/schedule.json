@@ -1,0 +1,502 @@
+[
+  {
+    "day": 1,
+    "date": "6/3",
+    "label": "Day 1",
+    "fullDate": "2026年6月3日（水）",
+    "title": "到着・ビバリーヒルズ散策",
+    "area": "Beverly Hills",
+    "hotel": "ザ モザイク ホテル（BH）",
+    "events": [
+      {
+        "time": "前日出発",
+        "icon": "✈️",
+        "tag": "move",
+        "title": "成田空港 出発",
+        "desc": "JL062便にて成田を出発。約10時間のフライトでLAXへ向かいます。",
+        "loc": "成田国際空港",
+        "addr": "成田国際空港, 千葉県成田市",
+        "hasMap": true
+      },
+      {
+        "time": "08:25",
+        "icon": "🛬",
+        "tag": "move",
+        "title": "LAX 到着・入国",
+        "desc": "入国審査を経て、レンタカー手続き（2台）を行います。",
+        "loc": "Los Angeles International Airport",
+        "addr": "Los Angeles International Airport, Los Angeles, CA",
+        "hasMap": true
+      },
+      {
+        "time": "11:00",
+        "icon": "🏨",
+        "tag": "hotel",
+        "title": "ホテル チェックイン",
+        "desc": "ザ モザイク ホテルにチェックイン。荷物を預けて時差調整の休憩を取ります。",
+        "loc": "ザ モザイク ホテル",
+        "addr": "125 Spalding Dr, Beverly Hills, CA 90212",
+        "hasMap": true
+      },
+      {
+        "time": "13:00",
+        "icon": "🍽",
+        "tag": "meal",
+        "title": "昼食",
+        "desc": "ホテル周辺のカフェで昼食。ビバリーヒルズの雰囲気を感じながら時差調整を。",
+        "loc": "ビバリーヒルズ周辺",
+        "addr": "Beverly Hills, CA 90210",
+        "hasMap": true
+      },
+      {
+        "time": "15:00",
+        "icon": "🛍",
+        "tag": "arch",
+        "title": "ロデオドライブ 散策",
+        "desc": "世界有数の高級ブティック街。各ブランドが競うように独自の建築デザインを採用した商業建築のショーケース。",
+        "loc": "Rodeo Drive",
+        "addr": "Rodeo Dr, Beverly Hills, CA 90210",
+        "hasMap": true,
+        "detail": "【視察ポイント】\n・各ブランド旗艦店のファサードデザインと差別化戦略\n・路面店建築における採光・開口部の工夫"
+      },
+      {
+        "time": "18:00",
+        "icon": "🍽",
+        "tag": "meal",
+        "title": "ディナー",
+        "desc": "ビバリーヒルズエリアにてディナー。",
+        "loc": "ビバリーヒルズ",
+        "addr": "Beverly Hills, CA 90210",
+        "hasMap": true
+      }
+    ]
+  },
+  {
+    "day": 2,
+    "date": "6/4",
+    "label": "Day 2",
+    "fullDate": "2026年6月4日（木）",
+    "title": "ユニバーサルスタジオ・ハリウッド（終日）",
+    "area": "Universal City",
+    "hotel": "ザ モザイク ホテル（BH）",
+    "events": [
+      {
+        "time": "09:00",
+        "icon": "🚗",
+        "tag": "move",
+        "title": "ホテル 出発",
+        "desc": "ホテルを出発してユニバーサルスタジオへ向かいます（約30分）。",
+        "loc": "",
+        "addr": "",
+        "hasMap": false
+      },
+      {
+        "time": "10:00",
+        "icon": "🎢",
+        "tag": "spec",
+        "title": "ユニバーサルスタジオ・ハリウッド",
+        "desc": "映画スタジオとテーマパークが融合した世界最大級のエンターテインメント施設。",
+        "loc": "Universal Studios Hollywood",
+        "addr": "100 Universal City Plaza, Universal City, CA 91608",
+        "hasMap": true,
+        "detail": "【体験ポイント】\n・スタジオツアーで映画セットの空間演出を体感\n・大規模施設の動線設計・サインデザイン"
+      },
+      {
+        "time": "10:30",
+        "icon": "🎬",
+        "tag": "free",
+        "title": "終日 パーク内自由行動",
+        "desc": "スタジオツアー、各種アトラクションを自由に体験。",
+        "loc": "",
+        "addr": "",
+        "hasMap": false
+      },
+      {
+        "time": "18:00",
+        "icon": "🚗",
+        "tag": "move",
+        "title": "パーク 出発",
+        "desc": "パークを出発。ホテルへ向かいます（約45分）。",
+        "loc": "",
+        "addr": "",
+        "hasMap": false
+      },
+      {
+        "time": "19:00",
+        "icon": "🏨",
+        "tag": "hotel",
+        "title": "ホテル 帰着",
+        "desc": "ザ モザイク ホテルへ帰着。明日の建築視察に備えて休息。",
+        "loc": "",
+        "addr": "",
+        "hasMap": false
+      }
+    ]
+  },
+  {
+    "day": 3,
+    "date": "6/5",
+    "label": "Day 3",
+    "fullDate": "2026年6月5日（金）",
+    "title": "シンドラー・ハウス ＋ イームズ・ハウス",
+    "area": "West Hollywood / Pacific Palisades",
+    "hotel": "ザ モザイク ホテル（BH）",
+    "events": [
+      {
+        "time": "11:00",
+        "icon": "🏠",
+        "tag": "arch",
+        "title": "シンドラー・ハウス（MAK Center）",
+        "desc": "1921-22年。R.M.シンドラー設計。傾斜型枠コンクリート壁と可動パネル・木製フレームの融合。カリフォルニア・モダニズムの原点。",
+        "loc": "MAK Center / Schindler House",
+        "addr": "835 N Kings Rd, West Hollywood, CA 90069",
+        "hasMap": true,
+        "architect": "R.M. シンドラー",
+        "year": "1921-22年",
+        "style": "カリフォルニア・モダニズム",
+        "detail": "【視察ポイント】\n① 傾斜型枠コンクリート壁の表情と質感\n② 可動パネルによる屋内・屋外境界の曖昧化"
+      },
+      {
+        "time": "13:00",
+        "icon": "🍽",
+        "tag": "meal",
+        "title": "昼食（メルローズ・アベニュー）",
+        "desc": "メルローズ通り沿いのレストランで昼食。",
+        "loc": "Melrose Avenue",
+        "addr": "Melrose Ave, West Hollywood, CA 90046",
+        "hasMap": true
+      },
+      {
+        "time": "14:30",
+        "icon": "🏠",
+        "tag": "arch",
+        "title": "イームズ・ハウス（Case Study House #8）",
+        "desc": "1949年。チャールズ＆レイ・イームズ設計。規格部材を用いた実験住宅。モンドリアン風カラフルパネルと軽快な鉄骨フレームが特徴。",
+        "loc": "Eames House",
+        "addr": "203 Chautauqua Blvd, Pacific Palisades, CA 90272",
+        "hasMap": true,
+        "architect": "チャールズ＆レイ・イームズ",
+        "year": "1949年",
+        "style": "ケーススタディ・ハウス（プレファブ）",
+        "detail": "【視察ポイント】\n① 工業製品の規格部材を住宅に転用する発想\n② カラーパネルの配色とグリッド構成"
+      },
+      {
+        "time": "16:30",
+        "icon": "🌆",
+        "tag": "free",
+        "title": "サンセット・ストリップ",
+        "desc": "夕刻のサンセット大通りを散策。エンターテインメント文化の発信地。",
+        "loc": "Sunset Strip",
+        "addr": "Sunset Blvd, West Hollywood, CA 90069",
+        "hasMap": true
+      },
+      {
+        "time": "18:00",
+        "icon": "🏨",
+        "tag": "hotel",
+        "title": "ホテル 帰着",
+        "desc": "ザ モザイク ホテルへ帰着。",
+        "loc": "",
+        "addr": "",
+        "hasMap": false
+      }
+    ]
+  },
+  {
+    "day": 4,
+    "date": "6/6",
+    "label": "Day 4",
+    "fullDate": "2026年6月6日（土）",
+    "title": "ギャンブル邸・ホリーホック → DTLA移動",
+    "area": "Pasadena → Downtown LA",
+    "hotel": "オムニ ロサンゼルス ホテル（DTLA）",
+    "events": [
+      {
+        "time": "08:00",
+        "icon": "🏨",
+        "tag": "move",
+        "title": "チェックアウト・出発",
+        "desc": "ザ モザイク ホテルをチェックアウト。パサデナへ出発。",
+        "loc": "",
+        "addr": "",
+        "hasMap": false
+      },
+      {
+        "time": "11:40",
+        "icon": "🏛",
+        "tag": "arch",
+        "title": "ギャンブル邸",
+        "desc": "1908年。グリーン＆グリーン設計。アメリカン・クラフツマン様式の最高傑作。日本建築の影響を受けた深い軒、精緻な木組み。",
+        "loc": "Gamble House",
+        "addr": "4 Westmoreland Pl, Pasadena, CA 91103",
+        "hasMap": true,
+        "architect": "グリーン＆グリーン",
+        "year": "1908年",
+        "style": "アメリカン・クラフツマン",
+        "detail": "【視察ポイント】\n① 深い軒と庇（夏の日射遮蔽・雨仕舞の技法）\n② 精緻な木組みの継手・仕口"
+      },
+      {
+        "time": "15:00",
+        "icon": "🏛",
+        "tag": "arch",
+        "title": "ホリーホック・ハウス",
+        "desc": "1921年。フランク・ロイド・ライト設計。マヤ・リバイバル様式。立葵の装飾モチーフ、プレキャストコンクリートブロック使用。",
+        "loc": "Hollyhock House",
+        "addr": "4800 Hollywood Blvd, Los Angeles, CA 90027",
+        "hasMap": true,
+        "architect": "フランク・ロイド・ライト",
+        "year": "1921年",
+        "style": "マヤ・リバイバル / 有機的建築",
+        "detail": "【視察ポイント】\n① プレキャストコンクリートブロックの組積技法\n② 繰り返しモチーフによる装飾の統一感"
+      },
+      {
+        "time": "17:00",
+        "icon": "🚗",
+        "tag": "move",
+        "title": "DTLA へ移動・チェックイン",
+        "desc": "オムニ ロサンゼルス ホテルへ移動してチェックイン。",
+        "loc": "オムニ ロサンゼルス ホテル",
+        "addr": "251 S Olive St, Los Angeles, CA 90012",
+        "hasMap": true
+      },
+      {
+        "time": "20:00",
+        "icon": "🍽",
+        "tag": "meal",
+        "title": "夕食",
+        "desc": "ダウンタウンLAで夕食。",
+        "loc": "オムニ ロサンゼルス ホテル周辺",
+        "addr": "251 S Olive St, Los Angeles, CA 90012",
+        "hasMap": true
+      }
+    ]
+  },
+  {
+    "day": 5,
+    "date": "6/7",
+    "label": "Day 5",
+    "fullDate": "2026年6月7日（日）",
+    "title": "終日フリータイム ＋ MLB観戦",
+    "area": "Downtown LA",
+    "hotel": "オムニ ロサンゼルス ホテル（DTLA）",
+    "events": [
+      {
+        "time": "日中",
+        "icon": "✨",
+        "tag": "free",
+        "title": "自由行動・フリータイム",
+        "desc": "ショッピング、ビーチ散策、観光など思い思いの時間をお過ごしください。",
+        "loc": "",
+        "addr": "",
+        "hasMap": false,
+        "detail": "【おすすめスポット】\n🏖 サンタモニカ・ピア＆ビーチ\n🔭 グリフィス天文台\n🛍 メルローズ・アベニュー"
+      },
+      {
+        "time": "〜推奨",
+        "icon": "🏖",
+        "tag": "free",
+        "title": "サンタモニカ・ピア",
+        "desc": "太平洋岸の象徴的な観光スポット。ルート66の終着点。",
+        "loc": "Santa Monica Pier",
+        "addr": "200 Santa Monica Pier, Santa Monica, CA 90401",
+        "hasMap": true
+      },
+      {
+        "time": "〜推奨",
+        "icon": "🔭",
+        "tag": "free",
+        "title": "グリフィス天文台",
+        "desc": "映画「ラ・ラ・ランド」のロケ地。LAを一望できる丘の上の天文台。",
+        "loc": "Griffith Observatory",
+        "addr": "2800 E Observatory Rd, Los Angeles, CA 90027",
+        "hasMap": true
+      },
+      {
+        "time": "19:10",
+        "icon": "⚾",
+        "tag": "spec",
+        "title": "MLB観戦　ドジャース vs エンゼルス",
+        "desc": "ドジャースタジアムにてメジャーリーグ観戦。試合開始19:10予定。スタジアムグルメや野球文化も体験。",
+        "loc": "Dodger Stadium",
+        "addr": "1000 Vin Scully Ave, Los Angeles, CA 90012",
+        "hasMap": true,
+        "detail": "【情報】\n・収容人数：約56,000人\n・名物グルメ：ドジャードッグは必食！"
+      },
+      {
+        "time": "23:00",
+        "icon": "🏨",
+        "tag": "hotel",
+        "title": "ホテル 帰着",
+        "desc": "試合終了後、ホテルへ帰着。",
+        "loc": "",
+        "addr": "",
+        "hasMap": false
+      }
+    ]
+  },
+  {
+    "day": 6,
+    "date": "6/8",
+    "label": "Day 6",
+    "fullDate": "2026年6月8日（月）",
+    "title": "ダウンタウン 徒歩集中視察",
+    "area": "Downtown LA（徒歩）",
+    "hotel": "オムニ ロサンゼルス ホテル（DTLA）",
+    "events": [
+      {
+        "time": "09:00",
+        "icon": "🚶",
+        "tag": "move",
+        "title": "ホテル 出発（徒歩）",
+        "desc": "本日は徒歩でダウンタウンの建築を集中視察します。",
+        "loc": "",
+        "addr": "",
+        "hasMap": false
+      },
+      {
+        "time": "09:30",
+        "icon": "🏛",
+        "tag": "arch",
+        "title": "ブラッドベリービル",
+        "desc": "1893年。ジョージ・ワイマン設計。LA最古の商業ビルの一つ。内部は自然光が降り注ぐ壮大なアトリウム空間。鋳鉄製手すり・オープンケージ式ELVが必見。",
+        "loc": "Bradbury Building",
+        "addr": "304 S Broadway, Los Angeles, CA 90013",
+        "hasMap": true,
+        "architect": "ジョージ・ワイマン",
+        "year": "1893年",
+        "style": "ビクトリアン・イタリアネート",
+        "detail": "【視察ポイント】\n① トップライトから差し込む自然光のアトリウム効果\n② 鋳鉄装飾の精巧なディテール"
+      },
+      {
+        "time": "11:00",
+        "icon": "🎵",
+        "tag": "arch",
+        "title": "ウォルト・ディズニー・コンサートホール",
+        "desc": "2003年。フランク・ゲーリー設計。帆船をイメージしたステンレス曲面パネル。LAの文化的ランドマーク。",
+        "loc": "Walt Disney Concert Hall",
+        "addr": "111 S Grand Ave, Los Angeles, CA 90012",
+        "hasMap": true,
+        "architect": "フランク・ゲーリー",
+        "year": "2003年",
+        "style": "解体主義建築（デコンストラクティビズム）",
+        "detail": "【視察ポイント】\n① ステンレス曲面パネルの反射・陰影・素材感\n② 彫刻的な外観と音楽ホールとしての機能の融合"
+      },
+      {
+        "time": "12:30",
+        "icon": "🍽",
+        "tag": "meal",
+        "title": "昼食（グランドセントラル・マーケット）",
+        "desc": "1917年創業のLA最大の屋内フードマーケット。多様なグルメが一堂に集まる歴史的市場建築。",
+        "loc": "Grand Central Market",
+        "addr": "317 S Broadway, Los Angeles, CA 90013",
+        "hasMap": true
+      },
+      {
+        "time": "14:00",
+        "icon": "🎨",
+        "tag": "arch",
+        "title": "ザ・ブロード 美術館",
+        "desc": "2015年。DS+R設計。ハニカム構造の白い多孔質外装が特徴。自然光を巧みに取り込む展示空間。",
+        "loc": "The Broad Museum",
+        "addr": "221 S Grand Ave, Los Angeles, CA 90012",
+        "hasMap": true,
+        "architect": "ディラー・スコフィディオ＋レンフロ（DS+R）",
+        "year": "2015年",
+        "style": "コンテンポラリー",
+        "detail": "【視察ポイント】\n① ハニカム構造外装の採光・通風・意匠効果\n② 「ヴェール」と「ヴォールト」の二重構造"
+      },
+      {
+        "time": "16:00",
+        "icon": "🏨",
+        "tag": "hotel",
+        "title": "ホテル 帰着",
+        "desc": "全建築視察完了。オムニ ロサンゼルス ホテルへ帰着。お疲れ様でした！",
+        "loc": "",
+        "addr": "",
+        "hasMap": false
+      }
+    ]
+  },
+  {
+    "day": 7,
+    "date": "6/9",
+    "label": "Day 7",
+    "fullDate": "2026年6月9日（火）",
+    "title": "帰国移動（LAX発）",
+    "area": "Los Angeles → 機内",
+    "hotel": "機内泊",
+    "events": [
+      {
+        "time": "06:00",
+        "icon": "⏰",
+        "tag": "hotel",
+        "title": "起床・朝食",
+        "desc": "早起きして朝食を済ませ、帰国の準備をします。",
+        "loc": "",
+        "addr": "",
+        "hasMap": false
+      },
+      {
+        "time": "07:00",
+        "icon": "🏨",
+        "tag": "move",
+        "title": "チェックアウト・出発",
+        "desc": "オムニ ロサンゼルス ホテルをチェックアウト。LAXへ出発（約30分）。",
+        "loc": "",
+        "addr": "",
+        "hasMap": false
+      },
+      {
+        "time": "07:30",
+        "icon": "🚗",
+        "tag": "move",
+        "title": "LAX 到着・レンタカー返却",
+        "desc": "LAXにてレンタカーを返却。チェックイン・搭乗手続きへ。",
+        "loc": "LAX Airport",
+        "addr": "Los Angeles International Airport, Los Angeles, CA",
+        "hasMap": true
+      },
+      {
+        "time": "10:25",
+        "icon": "✈️",
+        "tag": "move",
+        "title": "LAX 出発（成田行き）",
+        "desc": "JL061便にてLAXを出発。国際日付変更線を通過して成田へ。機内泊。",
+        "loc": "LAX Airport",
+        "addr": "Los Angeles International Airport, Los Angeles, CA",
+        "hasMap": true
+      }
+    ]
+  },
+  {
+    "day": 8,
+    "date": "6/10",
+    "label": "Day 8",
+    "fullDate": "2026年6月10日（水）",
+    "title": "成田到着・解散",
+    "area": "成田",
+    "hotel": "－（解散）",
+    "events": [
+      {
+        "time": "14:10",
+        "icon": "🛬",
+        "tag": "move",
+        "title": "成田国際空港 着",
+        "desc": "JL061便にて成田国際空港に到着。7泊8日の研修ツアー終了。",
+        "loc": "成田国際空港",
+        "addr": "成田国際空港, 千葉県成田市",
+        "hasMap": true
+      },
+      {
+        "time": "到着後",
+        "icon": "🎉",
+        "tag": "free",
+        "title": "ツアー解散",
+        "desc": "8日間の研修お疲れ様でした！各自で帰路につきます。",
+        "loc": "",
+        "addr": "",
+        "hasMap": false
+      }
+    ]
+  }
+]
