@@ -454,7 +454,7 @@
         "desc": "オムニ ロサンゼルス ホテルをチェックアウト。LAXへ出発（約30分）。",
         "loc": "オムニロサンゼルスホテル",
         "addr": "251 S Olive St, Los Angeles, CA 90012",
-        "hasMap": false
+        "hasMap": true
       },
       {
         "time": "07:30",
