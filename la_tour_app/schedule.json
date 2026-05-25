@@ -423,7 +423,7 @@
         "desc": "全建築視察完了。オムニ ロサンゼルス ホテルへ帰着。お疲れ様でした！",
         "loc": "オムニロサンゼルスホテル",
         "addr": "251 S Olive St, Los Angeles, CA 90012",
-        "hasMap": false
+        "hasMap": true
       }
     ]
   },
