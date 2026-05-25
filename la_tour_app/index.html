@@ -363,7 +363,9 @@ async function initLoad() {
 async function cloudSave(pat) {
   setSyncBadge('loading', '☁️ 保存中...');
   const btn = document.getElementById('cloudSaveBtn');
+  const toggleBtn = document.getElementById('editToggle');
   if (btn) btn.disabled = true;
+  if (toggleBtn) toggleBtn.disabled = true;
 
   try {
     // Get current file SHA (needed for update; omit for create)
@@ -393,6 +395,7 @@ async function cloudSave(pat) {
     alert('保存に失敗しました：\n' + e.message);
   } finally {
     if (btn) btn.disabled = false;
+    if (toggleBtn) toggleBtn.disabled = false;
   }
 }
 
@@ -437,19 +440,35 @@ function hideVeil() { document.getElementById('loadingVeil').classList.remove('s
 /* ══════════════════════════════════════
    EDIT MODE
 ══════════════════════════════════════ */
-function toggleEditMode() {
-  editMode = !editMode;
-  const btn = document.getElementById('editToggle');
-  btn.textContent = editMode ? '✅ 完了' : '✏️ 編集';
-  btn.classList.toggle('active', editMode);
-  document.getElementById('editBanner').style.display = editMode ? 'flex' : 'none';
-  document.getElementById('mainArea').classList.toggle('edit-mode', editMode);
+async function toggleEditMode() {
   if (!editMode) {
-    // Exiting edit mode — mark as unsynced
+    // 編集モード開始
+    editMode = true;
+    document.getElementById('editToggle').textContent = '✅ 完了';
+    document.getElementById('editToggle').classList.add('active');
+    document.getElementById('editBanner').style.display = 'flex';
+    document.getElementById('mainArea').classList.add('edit-mode');
+    renderDay();
+  } else {
+    // 編集モード終了 → GitHub に自動保存
+    editMode = false;
+    document.getElementById('editToggle').textContent = '✏️ 編集';
+    document.getElementById('editToggle').classList.remove('active');
+    document.getElementById('editBanner').style.display = 'none';
+    document.getElementById('mainArea').classList.remove('edit-mode');
     saveLocal();
-    setSyncBadge('warn', '⚠️ 未共有（「全員に共有」を押してください）');
+    renderDay();
+
+    const pat = getPAT();
+    if (pat) {
+      // PAT があれば即座に GitHub へ保存
+      await cloudSave(pat);
+    } else {
+      // PAT 未設定 → 設定モーダルを開く
+      setSyncBadge('warn', '⚠️ 未共有');
+      openPATModal(true);
+    }
   }
-  renderDay();
 }
 
 /* ══════════════════════════════════════
