@@ -340,7 +340,7 @@
         "desc": "試合終了後、ホテルへ帰着。",
         "loc": "オムニロサンゼルスホテル",
         "addr": "251 S Olive St, Los Angeles, CA 90012",
-        "hasMap": false
+        "hasMap": true
       }
     ]
   },
@@ -423,7 +423,7 @@
         "desc": "全建築視察完了。オムニ ロサンゼルス ホテルへ帰着。お疲れ様でした！",
         "loc": "オムニロサンゼルスホテル",
         "addr": "251 S Olive St, Los Angeles, CA 90012",
-        "hasMap": false
+        "hasMap": true
       }
     ]
   },
@@ -454,7 +454,7 @@
         "desc": "オムニ ロサンゼルス ホテルをチェックアウト。LAXへ出発（約30分）。",
         "loc": "オムニロサンゼルスホテル",
         "addr": "251 S Olive St, Los Angeles, CA 90012",
-        "hasMap": false
+        "hasMap": true
       },
       {
         "time": "07:30",
