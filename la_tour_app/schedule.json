@@ -73,10 +73,10 @@
         "time": "18:00",
         "icon": "🍽",
         "tag": "meal",
-        "title": "ディナー",
-        "desc": "ビバリーヒルズエリアにてディナー。",
-        "loc": "ビバリーヒルズ",
-        "addr": "Beverly Hills, CA 90210",
+        "title": "ディナー（Nerano）",
+        "desc": "イタリアンレストラン「Nerano」にてディナー。",
+        "loc": "Nerano",
+        "addr": "9960 S Santa Monica Blvd, Beverly Hills, CA 90212",
         "hasMap": true
       }
     ]
@@ -86,7 +86,7 @@
     "date": "6/4",
     "label": "Day 2",
     "fullDate": "2026年6月4日（木）",
-    "title": "ユニバーサルスタジオ・ハリウッド（終日）",
+    "title": "ユニバーサルスタジオ ＋ シンドラー・ハウス",
     "area": "Universal City",
     "hotel": "ザ モザイク ホテル（BH）",
     "events": [
@@ -122,7 +122,7 @@
         "hasMap": false
       },
       {
-        "time": "18:00",
+        "time": "16:30",
         "icon": "🚗",
         "tag": "move",
         "title": "パーク 出発",
@@ -132,7 +132,21 @@
         "hasMap": false
       },
       {
-        "time": "19:00",
+        "time": "17:00",
+        "icon": "🏠",
+        "tag": "arch",
+        "title": "シンドラー・ハウス（MAK Center）",
+        "desc": "1921-22年。R.M.シンドラー設計。カリフォルニア・モダニズムの原点。",
+        "loc": "MAK Center / Schindler House",
+        "addr": "835 Kings Rd, West Hollywood, CA 90069",
+        "hasMap": true,
+        "architect": "R.M. シンドラー",
+        "year": "1921-22年",
+        "style": "カリフォルニア・モダニズム",
+        "detail": "【視察ポイント】\n① 傾斜型枠コンクリート壁の表情と質感\n② 可動パネルによる屋内・屋外境界の曖昧化"
+      },
+      {
+        "time": "21:00",
         "icon": "🏨",
         "tag": "hotel",
         "title": "ホテル 帰着",
@@ -148,23 +162,23 @@
     "date": "6/5",
     "label": "Day 3",
     "fullDate": "2026年6月5日（金）",
-    "title": "シンドラー・ハウス ＋ イームズ・ハウス",
-    "area": "West Hollywood / Pacific Palisades",
+    "title": "ゲティセンター ＋ イームズ・ハウス",
+    "area": "Bel Air / Pacific Palisades",
     "hotel": "ザ モザイク ホテル（BH）",
     "events": [
       {
         "time": "11:00",
-        "icon": "🏠",
+        "icon": "🏛",
         "tag": "arch",
-        "title": "シンドラー・ハウス（MAK Center）",
-        "desc": "1921-22年。R.M.シンドラー設計。傾斜型枠コンクリート壁と可動パネル・木製フレームの融合。カリフォルニア・モダニズムの原点。",
-        "loc": "MAK Center / Schindler House",
-        "addr": "835 N Kings Rd, West Hollywood, CA 90069",
+        "title": "ゲティセンター",
+        "desc": "1997年。リチャード・マイヤー設計。白いトラバーチン石の丘上美術館。LAを一望できる絶景と建築美が融合。",
+        "loc": "J・ポール・ゲティ美術館",
+        "addr": "1200 Getty Center Dr, Los Angeles, CA 90049",
         "hasMap": true,
-        "architect": "R.M. シンドラー",
-        "year": "1921-22年",
-        "style": "カリフォルニア・モダニズム",
-        "detail": "【視察ポイント】\n① 傾斜型枠コンクリート壁の表情と質感\n② 可動パネルによる屋内・屋外境界の曖昧化"
+        "architect": "リチャード・マイヤー",
+        "year": "1997年",
+        "style": "コンテンポラリー",
+        "detail": "【視察ポイント】\n① トラバーチン石の肌理と光の関係\n② 丘上に広がる開放的な動線計画"
       },
       {
         "time": "13:00",
@@ -201,7 +215,17 @@
         "hasMap": true
       },
       {
-        "time": "18:00",
+        "time": "18:30",
+        "icon": "🍽",
+        "tag": "meal",
+        "title": "ディナー（Angelini Osteria）",
+        "desc": "イタリアン「Angelini Osteria」にてディナー。",
+        "loc": "Angelini Osteria",
+        "addr": "7313 Beverly Blvd, Los Angeles, CA 90036",
+        "hasMap": true
+      },
+      {
+        "time": "21:00",
         "icon": "🏨",
         "tag": "hotel",
         "title": "ホテル 帰着",
@@ -270,13 +294,13 @@
         "hasMap": true
       },
       {
-        "time": "20:00",
+        "time": "19:00",
         "icon": "🍽",
         "tag": "meal",
-        "title": "夕食",
-        "desc": "ダウンタウンLAで夕食。",
-        "loc": "オムニ ロサンゼルス ホテル周辺",
-        "addr": "251 S Olive St, Los Angeles, CA 90012",
+        "title": "ディナー（Girl & the Goat）",
+        "desc": "モダン・アメリカン「Girl & the Goat Los Angeles」にてディナー。",
+        "loc": "Girl & the Goat Los Angeles",
+        "addr": "555-3 Mateo St, Los Angeles, CA 90013",
         "hasMap": true
       }
     ]
@@ -302,6 +326,16 @@
         "detail": "【おすすめスポット】\n🏖 サンタモニカ・ピア＆ビーチ\n🔭 グリフィス天文台\n🛍 メルローズ・アベニュー"
       },
       {
+        "time": "10:30",
+        "icon": "🥞",
+        "tag": "free",
+        "title": "推奨ブランチ（Sweet Maple）",
+        "desc": "人気ブランチ「Sweet Maple」。フレンチトーストが名物。",
+        "loc": "Sweet Maple",
+        "addr": "1705 Ocean Ave Unit #110, Santa Monica, CA 90401",
+        "hasMap": true
+      },
+      {
         "time": "〜推奨",
         "icon": "🏖",
         "tag": "free",
@@ -319,6 +353,16 @@
         "desc": "映画「ラ・ラ・ランド」のロケ地。LAを一望できる丘の上の天文台。",
         "loc": "Griffith Observatory",
         "addr": "2800 E Observatory Rd, Los Angeles, CA 90027",
+        "hasMap": true
+      },
+      {
+        "time": "17:30",
+        "icon": "🏨",
+        "tag": "move",
+        "title": "ホテル集合",
+        "desc": "MLB観戦に向けてホテルに集合。ドジャースタジアムへ移動します。",
+        "loc": "オムニロサンゼルスホテル",
+        "addr": "251 S Olive St, Los Angeles, CA 90012",
         "hasMap": true
       },
       {
@@ -358,7 +402,7 @@
         "icon": "🚶",
         "tag": "move",
         "title": "ホテル 出発（徒歩）",
-        "desc": "本日は徒歩でダウンタウンの建築を集中視察します。",
+        "desc": "本日は徒歩でダウンタウンの建築を集中視察します。【推奨朝食】Aquarela Coffee - DTLA（ホテル近く）",
         "loc": "",
         "addr": "",
         "hasMap": false
@@ -402,7 +446,7 @@
         "hasMap": true
       },
       {
-        "time": "14:00",
+        "time": "14:30",
         "icon": "🎨",
         "tag": "arch",
         "title": "ザ・ブロード 美術館",
@@ -416,7 +460,17 @@
         "detail": "【視察ポイント】\n① ハニカム構造外装の採光・通風・意匠効果\n② 「ヴェール」と「ヴォールト」の二重構造"
       },
       {
-        "time": "16:00",
+        "time": "18:00",
+        "icon": "🍽",
+        "tag": "meal",
+        "title": "ディナー（Water Grill）",
+        "desc": "シーフード「Water Grill」にてディナー。LAを代表する新鮮な魚介料理が自慢。",
+        "loc": "Water Grill",
+        "addr": "544 S Grand Ave, Los Angeles, CA 90071",
+        "hasMap": true
+      },
+      {
+        "time": "21:00",
         "icon": "🏨",
         "tag": "hotel",
         "title": "ホテル 帰着",
