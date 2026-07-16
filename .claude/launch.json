@@ -6,6 +6,36 @@
       "runtimeExecutable": "npx",
       "runtimeArgs": ["serve", "la_tour_app", "-p", "3000", "--no-clipboard"],
       "port": 3000
+    },
+    {
+      "name": "horoscope",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "/Users/okazakimitsuruakira/Documents/horoscope-app", "-p", "8745", "--no-clipboard"],
+      "port": 8745
+    },
+    {
+      "name": "life-plan-app",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--prefix", "/Users/okazakimitsuruakira/Documents/antirravity/life-plan-app", "--", "-p", "3210"],
+      "port": 3210
+    },
+    {
+      "name": "inheritance-simulator",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "inheritance-simulator", "-p", "8747", "--no-clipboard"],
+      "port": 8747
+    },
+    {
+      "name": "r8-kijutsu-app",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "行政書士R8予想問題集/app", "-p", "8748", "--no-clipboard"],
+      "port": 8748
+    },
+    {
+      "name": "airdan",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "/Users/okazakimitsuruakira/Downloads", "-p", "8746", "--no-clipboard"],
+      "port": 8746
     }
   ]
 }
