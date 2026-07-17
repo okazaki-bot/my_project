@@ -19,6 +19,8 @@ import json
 import argparse
 from pathlib import Path
 from datetime import datetime, timedelta
+from email.utils import parseaddr
+from email.header import decode_header, make_header
 
 SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
 TOKEN_PATH = Path.home() / '.gmail_token.json'
@@ -70,13 +72,36 @@ def build_query(label_name, filter_condition):
         days = int(fc.split(':', 1)[1])
         after = (datetime.now() - timedelta(days=days)).strftime('%Y/%m/%d')
         parts.append(f'after:{after}')
-    elif fc.startswith('from:'):
+    elif fc.startswith('month:'):
+        # month:YYYY-MM 形式 → after/before のGmailクエリに変換
+        ym = filter_condition.split(':', 1)[1].strip()
+        year, month = (int(x) for x in ym.replace('/', '-').split('-')[:2])
+        after = datetime(year, month, 1)
+        before = datetime(year + (month // 12), (month % 12) + 1, 1)
+        parts.append(f'after:{after.strftime("%Y/%m/%d")}')
+        parts.append(f'before:{before.strftime("%Y/%m/%d")}')
+    elif fc.startswith('from:') or fc.startswith('subject:'):
         parts.append(filter_condition)
-    elif fc.startswith('subject:'):
+    elif 'after:' in fc or 'before:' in fc:
+        # 生のGmail日付クエリをそのまま透過（例: "after:2026/06/01 before:2026/07/01"）
         parts.append(filter_condition)
     # 'all' は追加条件なし
 
     return ' '.join(parts)
+
+
+def extract_sender(from_value: str):
+    """Fromヘッダーから表示名とアドレスを取り出す。表示名がなければアドレスのローカル部を使う。"""
+    name, addr = parseaddr(from_value or '')
+    if name and '=?' in name:
+        try:
+            name = str(make_header(decode_header(name)))
+        except Exception:
+            pass
+    name = name.strip().strip('"')
+    if not name:
+        name = addr.split('@')[0] if addr else '不明'
+    return name, addr
 
 
 def find_pdf_parts(parts):
@@ -154,10 +179,16 @@ def download_pdfs(label_name: str, filter_condition: str, output_dir: str):
             userId='me', id=msg_info['id'], format='full'
         ).execute()
 
+        headers = msg['payload'].get('headers', [])
         subject = next(
-            (h['value'] for h in msg['payload'].get('headers', []) if h['name'] == 'Subject'),
+            (h['value'] for h in headers if h['name'] == 'Subject'),
             '(件名なし)'
         )
+        from_value = next(
+            (h['value'] for h in headers if h['name'] == 'From'),
+            ''
+        )
+        sender_name, sender_email = extract_sender(from_value)
 
         all_parts = msg['payload'].get('parts', [])
         if not all_parts:
@@ -186,12 +217,14 @@ def download_pdfs(label_name: str, filter_condition: str, output_dir: str):
 
             records.append({
                 'subject': subject,
+                'sender_name': sender_name,
+                'sender_email': sender_email,
                 'original_filename': filename,
                 'saved_filename': save_path.name,
                 'saved_path': str(save_path),
                 'message_id': msg_info['id'],
             })
-            print(f"  保存: {save_path.name}")
+            print(f"  保存: {save_path.name}（送信者: {sender_name}）")
 
     print(f"\nダウンロード完了: {len(records)}件")
 

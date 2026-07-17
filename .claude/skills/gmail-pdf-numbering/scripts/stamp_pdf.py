@@ -1,6 +1,13 @@
 #!/usr/bin/env python3
 """
-PDF 1ページ目右上に丸付き番号を挿入するスクリプト
+PDFを「第N回」フォルダに振り分け、匿名化PDFの1ページ目右上に丸付き番号を挿入するスクリプト
+
+base_dir 直下に「第N回」（省略時は既存を検出して自動採番）を作り、その中に:
+  - 提出/   元PDFを <送信者名>_<アラビア数字>.pdf にコピー（元ファイルは保持）
+  - 匿名化/ 番号スタンプ済みPDFを <丸数字>.pdf で保存（名前なし＝匿名）
+  - 送付用/ 空フォルダ（手動運用用）
+
+番号はダウンロード総数 N から 1〜N をランダムに重複なく割り当てる。
 
 【依存】
 pip install pypdf reportlab
@@ -8,8 +15,10 @@ pip install pypdf reportlab
 
 import sys
 import io
+import re
 import json
 import random
+import shutil
 import argparse
 from pathlib import Path
 from datetime import datetime
@@ -96,20 +105,46 @@ def stamp_pdf(input_path: Path, output_path: Path, number: int) -> str:
     return CIRCLED.get(number, f'({number})')
 
 
-def _output_filename(stem: str, number: int, naming_rule: str) -> str:
-    if naming_rule == 'number':
-        return f"{stem}_number{number:02d}.pdf"
-    circled_char = CIRCLED.get(number, f'({number})')
-    return f"{stem}_{circled_char}.pdf"
+def _sanitize_name(name: str) -> str:
+    """フォルダ名・ファイル名に使えない文字を除去する。"""
+    name = re.sub(r'[\\/:*?"<>|\r\n\t]', '', name or '').strip()
+    return name or '不明'
 
 
-def process_manifest(manifest_path: str, naming_rule: str = 'circled') -> list:
+def _unique_path(path: Path) -> Path:
+    """同名ファイルがあればタイムスタンプを付与して衝突を回避する。"""
+    if not path.exists():
+        return path
+    ts = datetime.now().strftime('%Y%m%d_%H%M%S_%f')[:22]
+    return path.with_name(f"{path.stem}_{ts}{path.suffix}")
+
+
+def _next_kai(base: Path) -> int:
+    """base 直下の「第N回」フォルダを検出し、最大値+1を返す（無ければ1）。"""
+    pat = re.compile(r'^第(\d+)回$')
+    maxn = 0
+    if base.exists():
+        for child in base.iterdir():
+            if child.is_dir():
+                m = pat.match(child.name)
+                if m:
+                    maxn = max(maxn, int(m.group(1)))
+    return maxn + 1
+
+
+def process_manifest(manifest_path: str, base_dir: str, kai: int = 0) -> list:
     """
-    _manifest.json を読み込み、全PDFにランダムな番号を挿入する。
-    結果を _report.json として保存し、records リストを返す。
+    _manifest.json を読み込み、ダウンロード総数 N から 1〜N のランダムな番号を
+    重複なしで割り当てる。base_dir 直下に「第N回」フォルダ（kai=0なら自動採番）を作り、
+    その中に以下を生成する。第1回フォルダと同じ構成。
+      - 提出/   … 元PDFを「<送信者名>_<アラビア数字>.pdf」にコピー（元ファイルは保持）
+      - 匿名化/ … 番号スタンプ済みPDFを「<丸数字>.pdf」で保存（名前なし＝匿名）
+      - 送付用/ … 空フォルダ（手動運用用）
+    結果を 第N回/_report.json として保存し、results リストを返す。
     """
     manifest_path = Path(manifest_path)
-    output_dir = manifest_path.parent
+    base = Path(base_dir)
+    base.mkdir(parents=True, exist_ok=True)
 
     with open(manifest_path, encoding='utf-8') as f:
         records = json.load(f)
@@ -117,6 +152,15 @@ def process_manifest(manifest_path: str, naming_rule: str = 'circled') -> list:
     if not records:
         print("添付PDFが0件です。処理をスキップします。")
         return []
+
+    kai_num = kai if kai > 0 else _next_kai(base)
+    kai_dir = base / f'第{kai_num}回'
+    submit_dir = kai_dir / '提出'
+    anon_dir = kai_dir / '匿名化'
+    send_dir = kai_dir / '送付用'
+    for d in (submit_dir, anon_dir, send_dir):
+        d.mkdir(parents=True, exist_ok=True)
+    print(f"対象回フォルダ: {kai_dir.name}")
 
     n = len(records)
     numbers = list(range(1, n + 1))
@@ -127,20 +171,19 @@ def process_manifest(manifest_path: str, naming_rule: str = 'circled') -> list:
     for rec, number in zip(records, numbers):
         src = Path(rec['saved_path'])
         circled_char = CIRCLED.get(number, f'({number})')
-        stem = src.stem
-        out_name = _output_filename(stem, number, naming_rule)
-        out_path = output_dir / out_name
+        name = _sanitize_name(rec.get('sender_name', ''))
 
-        # 出力ファイル名衝突回避
-        if out_path.exists():
-            ts = datetime.now().strftime('%Y%m%d_%H%M%S')
-            out_path = output_dir / f"{stem}_{ts}_{out_name}"
+        # 提出: <送信者名>_<アラビア数字>.pdf  / 匿名化: <丸数字>.pdf（名前なし）
+        submit_name = f"{name}_{number}.pdf"
+        anon_name = f"{circled_char}.pdf"
 
         result = {
             'subject': rec.get('subject', ''),
+            'sender_name': name,
+            'sender_email': rec.get('sender_email', ''),
             'original_filename': rec.get('original_filename', ''),
-            'saved_filename': rec.get('saved_filename', ''),
-            'output_filename': out_name,
+            'submit_path': '',
+            'anon_path': '',
             'number': number,
             'circled': circled_char,
             'status': '',
@@ -155,8 +198,15 @@ def process_manifest(manifest_path: str, naming_rule: str = 'circled') -> list:
             continue
 
         try:
-            actual = stamp_pdf(src, out_path, number)
-            result['output_filename'] = out_path.name
+            # 提出: 元PDFをリネームしてコピー（元ファイルは保持）
+            submit_path = _unique_path(submit_dir / submit_name)
+            shutil.copy2(src, submit_path)
+            result['submit_path'] = str(submit_path)
+
+            # 匿名化: 番号スタンプ済みPDFを丸数字名で保存
+            anon_path = _unique_path(anon_dir / anon_name)
+            actual = stamp_pdf(src, anon_path, number)
+            result['anon_path'] = str(anon_path)
             result['status'] = '成功'
             if actual != circled_char:
                 result['note'] = '代替描画使用（丸数字フォント未対応）'
@@ -169,11 +219,11 @@ def process_manifest(manifest_path: str, naming_rule: str = 'circled') -> list:
             result['note'] = str(e)
             print(f"  [エラー] {src.name}: {e}")
         else:
-            print(f"  [成功] {out_path.name}  ({circled_char})")
+            print(f"  [成功] 提出/{submit_name}  →  匿名化/{anon_name}")
 
         results.append(result)
 
-    report_path = output_dir / '_report.json'
+    report_path = kai_dir / '_report.json'
     with open(report_path, 'w', encoding='utf-8') as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
 
@@ -194,9 +244,10 @@ if __name__ == '__main__':
     # バッチモード（_manifest.json から一括処理）
     batch = sub.add_parser('batch', help='マニフェストから一括処理')
     batch.add_argument('--manifest', required=True, help='_manifest.json のパス')
-    batch.add_argument('--naming', default='circled',
-                       choices=['circled', 'number'],
-                       help='ファイル命名規則: circled=①付き / number=number01付き')
+    batch.add_argument('--base-dir', required=True,
+                       help='振り分け先ベースフォルダ（この中に 第N回/提出・匿名化・送付用 を作成）')
+    batch.add_argument('--kai', type=int, default=0,
+                       help='回数（省略時は既存「第N回」を検出して自動採番）')
 
     # 単体モード
     single = sub.add_parser('single', help='単一PDFに番号を挿入')
@@ -207,7 +258,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     if args.mode == 'batch':
-        process_manifest(args.manifest, args.naming)
+        process_manifest(args.manifest, args.base_dir, args.kai)
     elif args.mode == 'single':
         result = stamp_pdf(Path(args.input), Path(args.output), args.number)
         print(f"完了: {args.output}  ({result})")
