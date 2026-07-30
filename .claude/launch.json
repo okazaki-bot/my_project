@@ -2,6 +2,12 @@
   "version": "0.0.1",
   "configurations": [
     {
+      "name": "loan-calc-web",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "/Users/okazakimitsuruakira/Documents/my_project/loan-calc-web", "-p", "8781", "--no-clipboard"],
+      "port": 8781
+    },
+    {
       "name": "LA Tour App (static)",
       "runtimeExecutable": "npx",
       "runtimeArgs": ["serve", "la_tour_app", "-p", "3000", "--no-clipboard"],
@@ -36,6 +42,36 @@
       "runtimeExecutable": "npx",
       "runtimeArgs": ["serve", "/Users/okazakimitsuruakira/Downloads", "-p", "8746", "--no-clipboard"],
       "port": 8746
+    },
+    {
+      "name": "tax-calc-web",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "/Users/okazakimitsuruakira/Documents/my_project/tax-calc-web", "-p", "8778", "--no-clipboard"],
+      "port": 8778
+    },
+    {
+      "name": "chuko-fudousan-design",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "/Users/okazakimitsuruakira/Documents/my_project/chuko-fudousan-site/design", "-p", "8790", "--no-clipboard"],
+      "port": 8790
+    },
+    {
+      "name": "chuko-himeji-design",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "/Users/okazakimitsuruakira/Documents/my_project/chuko-fudousan-site/design-himeji", "-p", "8791", "--no-clipboard"],
+      "port": 8791
+    },
+    {
+      "name": "site-himeji-chuko",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "/Users/okazakimitsuruakira/Documents/my_project/site-himeji-chuko", "-p", "8792", "--no-clipboard"],
+      "port": 8792
+    },
+    {
+      "name": "loan-web",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "/Users/okazakimitsuruakira/Documents/my_project/loan-deduction-web", "-p", "8777", "--no-clipboard"],
+      "port": 8777
     }
   ]
 }

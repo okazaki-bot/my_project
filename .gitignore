@@ -24,3 +24,6 @@ build/
 # OS
 .DS_Store
 Thumbs.db
+
+# 独立repoで管理するデザイン案（別リポジトリ site-himeji-chuko）
+site-himeji-chuko/
