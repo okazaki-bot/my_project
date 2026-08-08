@@ -7,6 +7,7 @@ var QUESTIONS = [];
 
 var STORAGE_KEY = "r8kijutsu_history_v1";
 var MODE_KEY = "r8kijutsu_mode_v1"; // "practice" | "exam"
+var SUBJECT_KEY = "r8kijutsu_subject_v1"; // "" | "行政法" | "民法"
 var app = document.getElementById("app");
 
 function getFlowMode(){
@@ -17,6 +18,21 @@ window.setFlowMode = function(m){
   localStorage.setItem(MODE_KEY, m);
   renderHome();
 };
+
+// ---------- 科目選択（トップで絞り込み） ----------
+function getSubject(){
+  var s = localStorage.getItem(SUBJECT_KEY);
+  return (s === "行政法" || s === "民法") ? s : "";
+}
+window.setSubject = function(s){
+  localStorage.setItem(SUBJECT_KEY, s);
+  renderHome();
+};
+// 選択中の科目に絞った問題（未選択なら全問）
+function activeQuestions(){
+  var s = getSubject();
+  return s ? QUESTIONS.filter(function(q){ return q.sub === s; }) : QUESTIONS.slice();
+}
 
 // ---------- 履歴ストレージ ----------
 function loadHistory(){
@@ -56,7 +72,7 @@ function isDue(qid){
   return new Date() >= dueDate(qid);
 }
 function dueQuestions(){
-  return QUESTIONS.filter(function(q){ return isDue(q.id); })
+  return activeQuestions().filter(function(q){ return isDue(q.id); })
     .sort(function(a,b){
       var la = lastAttempt(a.id), lb = lastAttempt(b.id);
       var sa = la ? la.score : -1, sb = lb ? lb.score : -1;
@@ -115,22 +131,30 @@ window.go = function(view){
 
 // ---------- ホーム ----------
 function renderHome(){
-  var hist = loadHistory();
-  var answeredIds = {};
-  hist.forEach(function(a){ answeredIds[a.qid] = true; });
-  var answered = Object.keys(answeredIds).length;
+  var pool = activeQuestions();
+  var subj = getSubject();
   var due = dueQuestions();
+  var answered = pool.filter(function(q){ return lastAttempt(q.id); }).length;
   var avg = "-";
-  var lastScores = QUESTIONS.map(function(q){ var la = lastAttempt(q.id); return la ? la.score : null; })
-                            .filter(function(s){ return s !== null; });
+  var lastScores = pool.map(function(q){ var la = lastAttempt(q.id); return la ? la.score : null; })
+                       .filter(function(s){ return s !== null; });
   if(lastScores.length){
     avg = (lastScores.reduce(function(a,b){return a+b;},0) / lastScores.length).toFixed(1);
   }
-  var weak = QUESTIONS.filter(function(q){ var la = lastAttempt(q.id); return la && la.score < 10; }).length;
+  var weak = pool.filter(function(q){ var la = lastAttempt(q.id); return la && la.score < 10; }).length;
+  var subjName = subj || "全科目";
 
   app.innerHTML =
+    '<div class="qbox">' +
+      '<h2>科目を選ぶ</h2>' +
+      '<div class="subj-toggle">' +
+        '<button class="subj-btn' + (subj === "" ? " active" : "") + '" onclick="setSubject(\'\')">全科目<small>120問</small></button>' +
+        '<button class="subj-btn subj-g' + (subj === "行政法" ? " active" : "") + '" onclick="setSubject(\'行政法\')">行政法<small>35問</small></button>' +
+        '<button class="subj-btn subj-m' + (subj === "民法" ? " active" : "") + '" onclick="setSubject(\'民法\')">民法<small>85問</small></button>' +
+      '</div>' +
+    '</div>' +
     '<div class="cards">' +
-      '<div class="card"><div class="num">' + QUESTIONS.length + '</div><div class="lbl">総問題数</div></div>' +
+      '<div class="card"><div class="num">' + pool.length + '</div><div class="lbl">' + subjName + 'の問題数</div></div>' +
       '<div class="card"><div class="num">' + answered + '</div><div class="lbl">回答済み</div></div>' +
       '<div class="card"><div class="num">' + avg + '</div><div class="lbl">直近平均点 /20</div></div>' +
       '<div class="card"><div class="num">' + due.length + '</div><div class="lbl">今日の復習対象</div></div>' +
@@ -144,7 +168,7 @@ function renderHome(){
       '</div>' +
     '</div>' +
     '<div class="qbox">' +
-      '<h2>学習を始める（' + (getFlowMode() === "exam" ? "本番" : "練習") + 'モード）</h2>' +
+      '<h2>学習を始める（' + subjName + '・' + (getFlowMode() === "exam" ? "本番" : "練習") + 'モード）</h2>' +
       '<button class="btn btn-accent" onclick="startReview()">🔁 今日の復習（' + due.length + '問）</button>' +
       '<button class="btn btn-primary" onclick="startNew()">▶ 未回答から順に解く</button>' +
       '<button class="btn btn-primary" onclick="startRandom()">🎲 ランダム10問</button>' +
@@ -160,12 +184,12 @@ window.startReview = function(){
   startQuiz(due, "復習");
 };
 window.startNew = function(){
-  var list = QUESTIONS.filter(function(q){ return !lastAttempt(q.id); });
+  var list = activeQuestions().filter(function(q){ return !lastAttempt(q.id); });
   if(!list.length){ alert("全問回答済みです！復習モードをご利用ください。"); return; }
   startQuiz(list, "未回答");
 };
 window.startRandom = function(){
-  var pool = QUESTIONS.slice();
+  var pool = activeQuestions();
   pool.sort(function(){ return Math.random() - 0.5; });
   startQuiz(pool.slice(0,10), "ランダム");
 };

@@ -70,3 +70,13 @@ textarea#ansInput { width: 100%; min-height: 110px; font-size: 16px; padding: 12
 .mode-btn.active { border-color: #1a3a6b; background: #eef4ff; color: #1a3a6b; }
 .mode-btn.active small { color: #456; }
 @media (max-width: 560px){ .mode-toggle { grid-template-columns: 1fr; } }
+
+/* 科目選択トグル */
+.subj-toggle { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.subj-btn { border: 2px solid #ccd5e0; background: #f8f9fb; border-radius: 10px; padding: 14px 10px; font-size: 16px; font-weight: 700; color: #556; cursor: pointer; text-align: center; transition: all .15s; }
+.subj-btn small { display: block; font-size: 12px; font-weight: 400; color: #889; margin-top: 4px; }
+.subj-btn:hover { border-color: #a9b6c8; }
+.subj-btn.active { border-color: #1a3a6b; background: #eef4ff; color: #1a3a6b; }
+.subj-btn.subj-g.active { border-color: #2e7d32; background: #eaf6ea; color: #2e7d32; }
+.subj-btn.subj-m.active { border-color: #b45309; background: #fdf3e7; color: #b45309; }
+.subj-btn.active small { color: inherit; opacity: .8; }
