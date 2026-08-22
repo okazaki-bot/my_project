@@ -1,0 +1,202 @@
+* { box-sizing: border-box; }
+
+body {
+  font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+  margin: 0;
+  background: #f4f6f9;
+  color: #1f2937;
+  line-height: 1.6;
+}
+
+.app-header {
+  background: linear-gradient(135deg, #0f4c81, #1976d2);
+  color: #fff;
+  padding: 20px 16px;
+  text-align: center;
+}
+.app-header h1 { margin: 0; font-size: 1.5rem; }
+.subtitle { margin: 6px 0 0; font-size: 0.8rem; opacity: 0.9; }
+
+main { max-width: 1100px; margin: 0 auto; padding: 16px; }
+
+.panel {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  padding: 16px;
+  margin-bottom: 16px;
+}
+.panel-title {
+  font-size: 1.05rem;
+  margin: 0 0 12px;
+  padding-left: 10px;
+  border-left: 4px solid #1976d2;
+}
+
+/* プラン2カラム */
+.plans { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 800px) { .plans { grid-template-columns: 1fr; } }
+
+.plan-box {
+  border: 1px solid #d7dee7;
+  border-radius: 8px;
+  padding: 12px;
+}
+.plan-box.plan-a { border-top: 4px solid #1976d2; }
+.plan-box.plan-b { border-top: 4px solid #e65100; }
+.plan-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.plan-head h3 { margin: 0; font-size: 1rem; }
+.plan-a .plan-head h3 { color: #1976d2; }
+.plan-b .plan-head h3 { color: #e65100; }
+
+.field { margin-bottom: 10px; }
+.field label.fname {
+  display: block;
+  font-size: 0.78rem;
+  color: #4b5563;
+  margin-bottom: 2px;
+  font-weight: 600;
+}
+.field input[type="number"], .field select {
+  padding: 7px 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  width: 110px;
+}
+.field input.wide { width: 150px; }
+.unit { font-size: 0.8rem; color: #6b7280; margin-left: 3px; }
+.inline { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+.subsec {
+  border-top: 1px dashed #d7dee7;
+  margin-top: 12px;
+  padding-top: 10px;
+}
+.subsec-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #374151;
+  margin: 0 0 6px;
+}
+
+.row-list .rrow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 6px;
+  background: #f8fafc;
+  padding: 6px 8px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+.rrow input[type="number"] { width: 80px; padding: 5px 6px; }
+.rrow select { padding: 5px 6px; }
+
+.sub-btn, .del-btn {
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+.sub-btn:hover { background: #eff6ff; }
+.del-btn { color: #b91c1c; border-color: #fca5a5; padding: 3px 8px; }
+.del-btn:hover { background: #fef2f2; }
+
+.chk { font-size: 0.85rem; display: inline-flex; align-items: center; gap: 4px; }
+
+/* 結果テーブル */
+table.result {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.9rem;
+}
+table.result th, table.result td {
+  border: 1px solid #d7dee7;
+  padding: 7px 10px;
+  text-align: right;
+  white-space: nowrap;
+}
+table.result th { background: #eef3f9; text-align: center; }
+table.result td.rowname { text-align: left; font-weight: 600; background: #f8fafc; }
+table.result .col-a { color: #0f4c81; }
+table.result .col-b { color: #b34700; }
+table.result td.diff-good { color: #15803d; font-weight: 700; }
+table.result td.diff-bad { color: #b91c1c; font-weight: 700; }
+
+.big-num { font-size: 1.05rem; font-weight: 700; }
+
+.effect-box {
+  margin-top: 10px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.9rem;
+}
+.effect-box strong { color: #15803d; font-size: 1.1rem; }
+
+/* 償還表 */
+.schedule-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 0.88rem;
+}
+.table-wrap { overflow-x: auto; max-height: 480px; overflow-y: auto; }
+table.sched {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.8rem;
+}
+table.sched th, table.sched td {
+  border: 1px solid #e2e8f0;
+  padding: 4px 8px;
+  text-align: right;
+  white-space: nowrap;
+}
+table.sched th { background: #eef3f9; position: sticky; top: 0; }
+table.sched tr.prepay-row { background: #fff7ed; }
+table.sched tr.bonus-row td.bonus { color: #7c3aed; }
+
+/* 年次比較表 */
+.cmp-head { max-width: 560px; margin-bottom: 14px; }
+.cmp-wrap { max-height: 520px; }
+table.sched.cmp th.grp-a { background: #e3f0fb; color: #0f4c81; }
+table.sched.cmp th.grp-b { background: #fdece0; color: #b34700; }
+table.sched.cmp td.grp-a { background: #f5fafe; }
+table.sched.cmp td.grp-b { background: #fffaf5; }
+table.sched.cmp thead th { position: sticky; top: 0; z-index: 2; }
+.prep-tag {
+  display: inline-block;
+  font-size: 0.68rem;
+  color: #c2410c;
+  background: #ffedd5;
+  border-radius: 4px;
+  padding: 0 4px;
+}
+
+canvas#chart { width: 100%; height: auto; }
+.legend { font-size: 0.85rem; margin-top: 6px; display: flex; gap: 18px; }
+.legend .sw { display: inline-block; width: 14px; height: 3px; vertical-align: middle; margin-right: 4px; }
+
+.app-footer {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 8px 16px 32px;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.hint { font-size: 0.8rem; color: #6b7280; }
+.hidden { display: none; }

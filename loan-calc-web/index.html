@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>住宅ローン シミュレーター（返済・繰上げ返済・プラン比較）</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="app-header">
+    <h1>住宅ローン シミュレーター</h1>
+    <p class="subtitle">元利均等／元金均等・段階金利・ボーナス併用・繰上げ返済（何度でも）・2プラン比較・償還表・CSV出力対応</p>
+  </header>
+
+  <main>
+    <section class="panel">
+      <h2 class="panel-title">① 借入条件の入力</h2>
+      <div class="plans">
+        <div class="plan-col" id="planA"></div>
+        <div class="plan-col" id="planB"></div>
+      </div>
+    </section>
+
+    <section class="panel" id="summary-panel">
+      <h2 class="panel-title">② 試算結果・プラン比較</h2>
+      <div id="summary"></div>
+    </section>
+
+    <section class="panel" id="chart-panel">
+      <h2 class="panel-title">③ ローン残高の推移グラフ</h2>
+      <canvas id="chart" width="900" height="360"></canvas>
+      <div id="chart-legend" class="legend"></div>
+    </section>
+
+    <section class="panel" id="schedule-panel">
+      <h2 class="panel-title">④ 返済スケジュール（償還表）</h2>
+      <div class="schedule-controls">
+        <label><input type="radio" name="sched-plan" value="A" checked> プランA</label>
+        <label><input type="radio" name="sched-plan" value="B"> プランB</label>
+        <label><input type="radio" name="sched-mode" value="year" checked> 年ごと</label>
+        <label><input type="radio" name="sched-mode" value="month"> 毎月（全回数）</label>
+        <button id="csv-btn" class="sub-btn">CSVダウンロード</button>
+      </div>
+      <div id="schedule" class="table-wrap"></div>
+    </section>
+
+    <section class="panel" id="compare-panel">
+      <h2 class="panel-title">⑤ プラン比較表（年次）</h2>
+      <div id="compare"></div>
+    </section>
+
+    <section class="panel">
+      <h2 class="panel-title">⑥ 借入可能額の試算</h2>
+      <div id="borrowable"></div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>※本シミュレーションは概算です。実際の返済額・利息は金融機関の計算方法（端数処理・ボーナス返済の扱い等）により異なる場合があります。</p>
+    <p>※繰上げ返済の手数料、保証料の返戻等は考慮していません。正確な金額は各金融機関にご確認ください。</p>
+  </footer>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
