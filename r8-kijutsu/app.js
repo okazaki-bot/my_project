@@ -144,13 +144,16 @@ function renderHome(){
   var weak = pool.filter(function(q){ var la = lastAttempt(q.id); return la && la.score < 10; }).length;
   var subjName = subj || "全科目";
 
+  var nAll = QUESTIONS.length;
+  var nG = QUESTIONS.filter(function(q){ return q.sub === "行政法"; }).length;
+  var nM = QUESTIONS.filter(function(q){ return q.sub === "民法"; }).length;
   app.innerHTML =
     '<div class="qbox">' +
       '<h2>科目を選ぶ</h2>' +
       '<div class="subj-toggle">' +
-        '<button class="subj-btn' + (subj === "" ? " active" : "") + '" onclick="setSubject(\'\')">全科目<small>120問</small></button>' +
-        '<button class="subj-btn subj-g' + (subj === "行政法" ? " active" : "") + '" onclick="setSubject(\'行政法\')">行政法<small>35問</small></button>' +
-        '<button class="subj-btn subj-m' + (subj === "民法" ? " active" : "") + '" onclick="setSubject(\'民法\')">民法<small>85問</small></button>' +
+        '<button class="subj-btn' + (subj === "" ? " active" : "") + '" onclick="setSubject(\'\')">全科目<small>' + nAll + '問</small></button>' +
+        '<button class="subj-btn subj-g' + (subj === "行政法" ? " active" : "") + '" onclick="setSubject(\'行政法\')">行政法<small>' + nG + '問</small></button>' +
+        '<button class="subj-btn subj-m' + (subj === "民法" ? " active" : "") + '" onclick="setSubject(\'民法\')">民法<small>' + nM + '問</small></button>' +
       '</div>' +
     '</div>' +
     '<div class="cards">' +
@@ -450,6 +453,10 @@ function renderHistory(){
 if(!QUESTIONS.length){
   app.innerHTML = '<div class="qbox"><div class="empty">問題データの読み込みに失敗しました。</div></div>';
 } else {
+  // 問題数をタイトル・ヘッダーに動的反映（問題追加時の更新漏れ防止）
+  document.title = "令和8年度 行政書士 記述式" + QUESTIONS.length + "問";
+  var h1 = document.querySelector("#header h1");
+  if(h1) h1.textContent = "📝 R8 記述式" + QUESTIONS.length + "問";
   renderHome();
 }
 })();
