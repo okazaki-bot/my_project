@@ -111,6 +111,13 @@ def _sanitize_name(name: str) -> str:
     return name or '不明'
 
 
+def _append_note(existing: str, added: str) -> str:
+    """既存の注記を消さずに追記する。"""
+    if not existing:
+        return added
+    return f"{existing} / {added}"
+
+
 def _unique_path(path: Path) -> Path:
     """同名ファイルがあればタイムスタンプを付与して衝突を回避する。"""
     if not path.exists():
@@ -187,7 +194,8 @@ def process_manifest(manifest_path: str, base_dir: str, kai: int = 0) -> list:
             'number': number,
             'circled': circled_char,
             'status': '',
-            'note': '',
+            # ダウンロード時の注記（Word→PDF変換など）を引き継ぐ
+            'note': rec.get('note', ''),
         }
 
         if not src.exists():
@@ -209,14 +217,15 @@ def process_manifest(manifest_path: str, base_dir: str, kai: int = 0) -> list:
             result['anon_path'] = str(anon_path)
             result['status'] = '成功'
             if actual != circled_char:
-                result['note'] = '代替描画使用（丸数字フォント未対応）'
+                result['note'] = _append_note(
+                    result['note'], '代替描画使用（丸数字フォント未対応）')
         except ValueError as e:
             result['status'] = 'スキップ'
-            result['note'] = str(e)
+            result['note'] = _append_note(result['note'], str(e))
             print(f"  [スキップ] {src.name}: {e}")
         except Exception as e:
             result['status'] = 'エラー'
-            result['note'] = str(e)
+            result['note'] = _append_note(result['note'], str(e))
             print(f"  [エラー] {src.name}: {e}")
         else:
             print(f"  [成功] 提出/{submit_name}  →  匿名化/{anon_name}")

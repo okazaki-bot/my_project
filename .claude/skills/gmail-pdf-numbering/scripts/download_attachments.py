@@ -63,7 +63,9 @@ def get_label_id(service, label_name):
 
 
 def build_query(label_name, filter_condition):
-    parts = [f'label:"{label_name}"', 'has:attachment', 'filename:.pdf']
+    # PDF に加えて Word（.docx / .doc）添付も対象にする（Gmailの OR は {} で表現）
+    parts = [f'label:"{label_name}"', 'has:attachment',
+             '{filename:pdf filename:docx filename:doc}']
 
     fc = filter_condition.strip().lower()
     if fc == 'unread':
@@ -104,17 +106,69 @@ def extract_sender(from_value: str):
     return name, addr
 
 
+PDF_MIMES = {'application/pdf'}
+WORD_MIMES = {
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    'application/msword',
+}
+WORD_EXTS = ('.docx', '.doc')
+
+
+def is_pdf_part(mime: str, fname: str) -> bool:
+    return mime in PDF_MIMES or fname.lower().endswith('.pdf')
+
+
+def is_word_part(mime: str, fname: str) -> bool:
+    # 一時ファイル（~$foo.docx）は除外
+    if Path(fname).name.startswith('~$'):
+        return False
+    return mime in WORD_MIMES or fname.lower().endswith(WORD_EXTS)
+
+
 def find_pdf_parts(parts):
+    """PDF と Word（.docx/.doc）の添付パートを収集する。"""
     results = []
     for part in parts:
         mime = part.get('mimeType', '')
         fname = part.get('filename', '')
-        if mime == 'application/pdf' or fname.lower().endswith('.pdf'):
+        if is_pdf_part(mime, fname) or is_word_part(mime, fname):
             if part['body'].get('attachmentId'):
                 results.append(part)
         if 'parts' in part:
             results.extend(find_pdf_parts(part['parts']))
     return results
+
+
+def convert_word_to_pdf(src: Path) -> Path:
+    """Word添付をLibreOffice(headless)でPDFに変換し、生成されたPDFのパスを返す。
+
+    元のWordファイルは保持する（変換のみ）。変換に失敗した場合は例外を送出する。
+    """
+    import subprocess
+    import shutil
+
+    soffice = shutil.which('soffice') or '/Applications/LibreOffice.app/Contents/MacOS/soffice'
+    if not Path(soffice).exists() and not shutil.which('soffice'):
+        raise RuntimeError('LibreOffice(soffice)が見つかりません。変換できません。')
+
+    # 起動中のLibreOfficeとプロファイルが衝突しないよう専用プロファイルを使う
+    profile = src.parent / '.lo_profile'
+    cmd = [
+        soffice,
+        f'-env:UserInstallation=file://{profile}',
+        '--headless', '--norestore',
+        '--convert-to', 'pdf:writer_pdf_Export',
+        '--outdir', str(src.parent),
+        str(src),
+    ]
+    proc = subprocess.run(cmd, capture_output=True, text=True, timeout=180)
+    produced = src.with_suffix('.pdf')
+    if not produced.exists():
+        raise RuntimeError(
+            f'PDF変換に失敗しました: {src.name} / stdout={proc.stdout.strip()} '
+            f'stderr={proc.stderr.strip()}'
+        )
+    return produced
 
 
 def safe_save_path(output_dir: Path, filename: str) -> Path:
@@ -215,16 +269,29 @@ def download_pdfs(label_name: str, filter_condition: str, output_dir: str):
             with open(save_path, 'wb') as f:
                 f.write(data)
 
+            # Word添付はPDFへ変換する（元のWordファイルは残す）
+            note = ''
+            pdf_path = save_path
+            if is_word_part(part.get('mimeType', ''), filename):
+                try:
+                    pdf_path = convert_word_to_pdf(save_path)
+                    note = f'Word({Path(filename).suffix})をPDFに変換'
+                    print(f"  変換: {save_path.name} → {pdf_path.name}")
+                except Exception as e:
+                    print(f"WARN: PDF変換失敗 [{filename}]: {e}")
+                    continue
+
             records.append({
                 'subject': subject,
                 'sender_name': sender_name,
                 'sender_email': sender_email,
                 'original_filename': filename,
-                'saved_filename': save_path.name,
-                'saved_path': str(save_path),
+                'saved_filename': pdf_path.name,
+                'saved_path': str(pdf_path),
                 'message_id': msg_info['id'],
+                'note': note,
             })
-            print(f"  保存: {save_path.name}（送信者: {sender_name}）")
+            print(f"  保存: {pdf_path.name}（送信者: {sender_name}）")
 
     print(f"\nダウンロード完了: {len(records)}件")
 
@@ -243,7 +310,8 @@ def _save_manifest(out: Path, records: list):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Gmail PDF添付ダウンローダー')
+    parser = argparse.ArgumentParser(
+        description='Gmail添付ダウンローダー（PDF / Word添付はPDFへ自動変換）')
     parser.add_argument('--label', required=True, help='Gmailラベル名')
     parser.add_argument('--filter', default='all',
                         help='抽出条件: all / unread / days:N / from:addr / subject:text')
