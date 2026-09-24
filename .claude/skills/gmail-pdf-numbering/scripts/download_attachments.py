@@ -62,10 +62,11 @@ def get_label_id(service, label_name):
     return None
 
 
-def build_query(label_name, filter_condition):
-    # PDF に加えて Word（.docx / .doc）添付も対象にする（Gmailの OR は {} で表現）
-    parts = [f'label:"{label_name}"', 'has:attachment',
-             '{filename:pdf filename:docx filename:doc}']
+def build_query(label_name, filter_condition, pdf_only=False):
+    # 既定では PDF に加えて Word（.docx / .doc）添付も対象（GmailのORは {} で表現）。
+    # pdf_only=True のときは PDF だけに絞る（同じ人がWordとPDFの両方を送っている場合の重複回避）。
+    kinds = 'filename:pdf' if pdf_only else '{filename:pdf filename:docx filename:doc}'
+    parts = [f'label:"{label_name}"', 'has:attachment', kinds]
 
     fc = filter_condition.strip().lower()
     if fc == 'unread':
@@ -125,17 +126,21 @@ def is_word_part(mime: str, fname: str) -> bool:
     return mime in WORD_MIMES or fname.lower().endswith(WORD_EXTS)
 
 
-def find_pdf_parts(parts):
-    """PDF と Word（.docx/.doc）の添付パートを収集する。"""
+def find_pdf_parts(parts, pdf_only=False):
+    """PDF と Word（.docx/.doc）の添付パートを収集する。
+
+    pdf_only=True のときは Word を除外して PDF だけを返す。
+    """
     results = []
     for part in parts:
         mime = part.get('mimeType', '')
         fname = part.get('filename', '')
-        if is_pdf_part(mime, fname) or is_word_part(mime, fname):
-            if part['body'].get('attachmentId'):
-                results.append(part)
+        match = is_pdf_part(mime, fname) or (
+            not pdf_only and is_word_part(mime, fname))
+        if match and part['body'].get('attachmentId'):
+            results.append(part)
         if 'parts' in part:
-            results.extend(find_pdf_parts(part['parts']))
+            results.extend(find_pdf_parts(part['parts'], pdf_only))
     return results
 
 
@@ -181,7 +186,8 @@ def safe_save_path(output_dir: Path, filename: str) -> Path:
     return output_dir / f"{stem}_{ts}{suffix}"
 
 
-def download_pdfs(label_name: str, filter_condition: str, output_dir: str):
+def download_pdfs(label_name: str, filter_condition: str, output_dir: str,
+                  pdf_only: bool = False):
     service = get_service()
     out = Path(output_dir)
     out.mkdir(parents=True, exist_ok=True)
@@ -205,8 +211,10 @@ def download_pdfs(label_name: str, filter_condition: str, output_dir: str):
             print(f"  - {lbl['name']}")
         sys.exit(1)
 
-    query = build_query(label_name, filter_condition)
+    query = build_query(label_name, filter_condition, pdf_only)
     print(f"検索クエリ: {query}")
+    if pdf_only:
+        print("モード: PDF添付のみ（Word添付は対象外）")
 
     # メッセージ一覧取得
     messages = []
@@ -248,7 +256,7 @@ def download_pdfs(label_name: str, filter_condition: str, output_dir: str):
         if not all_parts:
             all_parts = [msg['payload']]
 
-        pdf_parts = find_pdf_parts(all_parts)
+        pdf_parts = find_pdf_parts(all_parts, pdf_only)
         if not pdf_parts:
             continue
 
@@ -316,6 +324,8 @@ if __name__ == '__main__':
     parser.add_argument('--filter', default='all',
                         help='抽出条件: all / unread / days:N / from:addr / subject:text')
     parser.add_argument('--output', required=True, help='保存先フォルダ')
+    parser.add_argument('--pdf-only', action='store_true',
+                        help='PDF添付のみを対象にする（Word添付を除外）')
     args = parser.parse_args()
 
-    download_pdfs(args.label, args.filter, args.output)
+    download_pdfs(args.label, args.filter, args.output, args.pdf_only)

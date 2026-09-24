@@ -51,6 +51,8 @@ Gmail OAuth認証の初回セットアップについては → `scripts/downloa
 | `.docx` / `.doc` | LibreOffice(headless)でPDFへ変換してから使用。元のWordファイルも作業フォルダに残る。レポートの備考に「Word(.docx)をPDFに変換」と記録 |
 | その他 | 対象外（取得しない） |
 
+**`--pdf-only` オプション**: Word添付を除外しPDFだけを対象にする。同じ人がWord版とPDF版の両方を送っている場合（例: 最初Wordで提出→後からPDFで再提出）、両方拾うと1人2件になり採番が崩れるため、PDFに出そろった時点では `--pdf-only` を使う。
+
 縦書き・日本語レイアウトのWordも変換可能。**変換後は必ず中身（日本語が化けていないか・レイアウト崩れがないか）を目視確認すること。**
 
 ## 実行フロー
@@ -78,6 +80,7 @@ python scripts/download_attachments.py \
   --label "[LABEL_NAME]" \
   --filter "[FILTER_CONDITION]" \
   --output "$STAGING"
+  # PDFだけを対象にしたい場合: --pdf-only
 ```
 
 - 指定ラベルが存在しない → エラー報告（利用可能ラベル一覧つき）して処理中断
