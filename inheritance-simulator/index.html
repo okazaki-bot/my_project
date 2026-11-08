@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>相続シミュレーター（ローカル版）</title>
+<title>相続シミュレーター</title>
 <style>
 :root{
   --navy:#1b3a5c; --navy-dark:#122840; --teal:#2a9d8f; --teal-dark:#1f7a70;
@@ -199,13 +199,13 @@ table.mini-result tr.tt td{background:#fdf6e3;font-weight:700}
 <body>
 <header class="app">
   <div class="logo">相続<span>シミュレーター</span></div>
-  <div class="sub">ローカル版 v2.1</div>
+  <div class="sub">v2.1</div>
   <button class="btn sm hd-spec" onclick="openSpec()" title="計算式と根拠法令の一覧">📚 計算根拠</button>
   <div class="case-name" id="hd-case">案件未選択</div>
 </header>
 <nav id="stepper"></nav>
 <main id="view"></main>
-<footer class="app">相続シミュレーター（ローカル版）— 概算計算ツールです。正確な税額は税理士にご確認ください。データはこのブラウザ内（localStorage）にのみ保存されます。｜<a href="#" onclick="openSpec();return false">計算式・根拠法令はこちら</a></footer>
+<footer class="app">相続シミュレーター — 概算計算ツールです。正確な税額は税理士にご確認ください。データはこのブラウザ内（localStorage）にのみ保存されます。｜<a href="#" onclick="openSpec();return false">計算式・根拠法令はこちら</a></footer>
 
 <div id="modal-bg"><div id="modal">
   <div class="m-head"><span id="m-title"></span><span class="x" onclick="closeModal()">✕</span></div>
